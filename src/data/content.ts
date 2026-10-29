@@ -1,138 +1,139 @@
 export const profile = {
   name: "Aliyan Sami",
-  role: "Backend & AI Engineer",
-  tagline: "I build AI-powered products — from robust Django backends to GPU-driven generative image pipelines.",
-  location: "Pakistan · Working remotely",
+  role: "Software Engineer — AI products & backend systems",
+  location: "Lahore, Pakistan",
+  timezone: "Asia/Karachi",
   email: "itsaliyansami@gmail.com",
-  github: "https://github.com/Steog83",
-  resumeNote: "Open to backend, AI/ML engineering & platform roles.",
-  summary:
-    "I'm a software engineer focused on the backend and applied AI. I design APIs and distributed workflows that stay reliable under load, and I build generative-image systems that turn research models into real product features. Lately I've been deep in orchestrating serverless GPU pipelines, fine-tuning diffusion models, and shipping identity-preserving image generation at scale.",
+  github: "https://github.com/aliyansami",
+  linkedin: "https://www.linkedin.com/in/aliyan-sami-748364215/",
+  intro:
+    "I build LLM features grounded in real data, and the Django services, queues and payment flows that keep them running in production.",
+  about: [
+    "I've spent about three years shipping production systems, first at TKXEL on a marketplace and payments platform, and now at Appifest, where I own AI features end to end across three client products at once.",
+    "Most of my work sits where models meet software that has to be reliable: retrieval pipelines that keep answers on-source, long-running generation jobs that survive retries, and APIs that log what every call costs.",
+  ],
 };
 
-export const stats = [
-  { value: "20+", label: "Production services shipped" },
-  { value: "3", label: "AI story products built" },
-  { value: "5+", label: "AWS services in production" },
-  { value: "∞", label: "Coffees debugged through" },
-];
-
-export const skills: { group: string; items: string[] }[] = [
-  {
-    group: "Languages",
-    items: ["Python", "TypeScript", "SQL", "Bash"],
-  },
-  {
-    group: "Backend",
-    items: ["Django", "Django REST Framework", "FastAPI patterns", "JWT / RBAC", "Gunicorn", "REST API design"],
-  },
-  {
-    group: "AI / ML",
-    items: ["FLUX", "Stable Diffusion", "LoRA fine-tuning", "Diffusers", "Identity preservation", "Prompt engineering", "fal.ai"],
-  },
-  {
-    group: "Cloud & Infra",
-    items: ["AWS S3", "AWS SQS", "AWS Lambda", "Step Functions", "RunPod GPU", "Docker", "CI/CD"],
-  },
-  {
-    group: "Data",
-    items: ["PostgreSQL", "Supabase", "Redis patterns", "S3 object storage"],
-  },
-];
-
 export type Project = {
-  title: string;
-  blurb: string;
-  description: string;
-  tags: string[];
-  highlights: string[];
-  accent: string;
-  featured?: boolean;
+  name: string;
+  kind: string;
+  year: string;
+  context: string;
+  summary: string;
+  points: string[];
+  stack: string[];
 };
 
 export const projects: Project[] = [
   {
-    title: "MyStoryStars",
-    blurb: "AI platform that turns a photo into a personalized, illustrated story.",
-    description:
-      "A production backend that generates fully personalized children's, love, and memorial stories. It orchestrates text and image generation through AWS Step Functions, processes work asynchronously via SQS workers, and renders characters with identity-preserving generative image pipelines.",
-    tags: ["Django", "AWS Step Functions", "SQS", "RunPod", "FLUX", "PostgreSQL"],
-    highlights: [
-      "Designed a multi-stage Step Functions workflow coordinating story, image, and video generation",
-      "Built SQS-driven background workers for reliable, retryable long-running AI jobs",
-      "Shipped three distinct story products: MyChildStars, MyHeartStars, MyMemoryStars",
+    name: "BlueRock",
+    kind: "AI tutor for real-estate exam prep",
+    year: "2026",
+    context: "Appifest",
+    summary:
+      "A tutor for the BC real-estate licensing exam that answers from the approved curriculum only, not from whatever the model happens to remember.",
+    points: [
+      "RAG over chunked curriculum content using text-embedding-3-small and vector similarity search, grounding multi-turn conversations.",
+      "Guardrails that keep answers on-source and decline off-topic or unsupported questions.",
+      "A single AI gateway with structured JSON outputs, token-usage logging and observability hooks for cost and behaviour.",
+      "Quiz analytics and explanation rewriting on top of the same retrieval layer.",
     ],
-    accent: "#6366f1",
-    featured: true,
+    stack: ["Django", "React", "OpenAI", "Embeddings", "Vector search"],
   },
   {
-    title: "Identity-Preserving Image Pipeline",
-    blurb: "Serverless GPU image generation with face & identity preservation.",
-    description:
-      "A RunPod-hosted FLUX pipeline that generates stylized, on-model characters from reference photos. It combines soft face-swap, identity attribute extraction, and head blending so generated subjects stay recognizably themselves across scenes.",
-    tags: ["FLUX", "RunPod", "Diffusers", "Docker", "CUDA", "PyTorch"],
-    highlights: [
-      "Engineered identity preservation via face-swap + attribute extraction + head blending",
-      "Containerized a CUDA/PyTorch worker for serverless GPU inference on RunPod",
-      "Tuned negative prompts & constraints to lock gender, hair, and likeness consistency",
+    name: "GenieVid AI",
+    kind: "Short-form video generation",
+    year: "2026",
+    context: "Appifest",
+    summary:
+      "Type a topic, get back a rendered vertical short: script, scene art, narration, word-synced captions and music.",
+    points: [
+      "Async Celery/Redis pipeline for script and image generation, ElevenLabs voiceover and Remotion rendering.",
+      "Frame-accurate Remotion compositions, FFmpeg media tooling and Cloudflare R2 delivery for videos and thumbnails.",
+      "Per-generation cost budgeting, moderation-aware image retries and IP-safe prompting.",
+      "Multi-step creation UI with art-style and caption presets, live progress and playback.",
     ],
-    accent: "#22d3ee",
-    featured: true,
+    stack: ["React", "Django", "Celery", "Redis", "Remotion", "ElevenLabs"],
   },
   {
-    title: "LoRA Fine-Tuning Service",
-    blurb: "On-demand LoRA training to personalize diffusion models per subject.",
-    description:
-      "A training + runtime service that fine-tunes LoRA adapters so the image model learns a specific person or character, then loads those adapters at inference time for sharper, more faithful personalization.",
-    tags: ["LoRA", "Fine-tuning", "FLUX", "Python", "RunPod"],
-    highlights: [
-      "Built the train → validate → serve loop for per-subject LoRA adapters",
-      "Added LoRA validation to catch bad training runs before they reach production",
-      "Integrated adapters into the live generation runtime with minimal cold-start cost",
+    name: "MyStoryStar",
+    kind: "Personalised illustrated stories",
+    year: "2026",
+    context: "Appifest",
+    summary:
+      "Generates personalised stories with matching illustrations, orchestrated as serverless workflows with GPU inference behind them.",
+    points: [
+      "LLM story generation, scene planning and downstream media prompts using OpenAI, AWS Lambda and Step Functions.",
+      "Error handling, idempotent webhooks and real-time status callbacks for long-running generation jobs.",
+      "Containerised GPU inference on RunPod for image and video generation, with Docker Compose for local end-to-end runs.",
+      "Django REST API covering auth, orders and cloud storage.",
     ],
-    accent: "#a855f7",
+    stack: ["Django REST", "OpenAI", "AWS Lambda", "Step Functions", "Docker", "RunPod"],
   },
   {
-    title: "Secure API & Auth Platform",
-    blurb: "JWT auth, RBAC middleware, and pre-signed S3 uploads.",
-    description:
-      "The platform layer behind the product: JWT authentication middleware with role-based access control, subscription management, and secure direct-to-S3 uploads using pre-signed URLs.",
-    tags: ["Django", "JWT", "RBAC", "AWS S3", "drf-spectacular"],
-    highlights: [
-      "Implemented JWT middleware with role-based route protection",
-      "Secured file uploads with pre-signed URLs instead of proxying through the API",
-      "Documented the API surface with OpenAPI / Swagger",
+    name: "Football Card",
+    kind: "Collectibles marketplace & payments",
+    year: "2024–25",
+    context: "TKXEL",
+    summary:
+      "A buyer–seller marketplace where money, disputes and messaging all had to be right the first time.",
+    points: [
+      "Stripe PaymentIntent flows end to end: webhook updates, refunds, payout onboarding and duplicate-event safeguards.",
+      "Escrow-aware orders and disputes with admin-controlled refunds and seller fund release.",
+      "Wallet and ledger APIs for top-ups, withdrawals, balances and history on PostgreSQL.",
+      "Firebase real-time messaging between buyers, sellers and admins, and market analytics refreshed by scheduled Celery jobs.",
     ],
-    accent: "#f59e0b",
+    stack: ["Django", "PostgreSQL", "Stripe", "Firebase", "Celery"],
   },
 ];
 
-export type ExperienceItem = {
-  role: string;
+export type Role = {
+  title: string;
   org: string;
+  place: string;
   period: string;
-  points: string[];
+  note: string;
 };
 
-export const experience: ExperienceItem[] = [
+export const roles: Role[] = [
   {
-    role: "Backend & AI Engineer",
+    title: "Software Engineer",
     org: "Appifest",
-    period: "Present",
-    points: [
-      "Lead backend engineer on MyStoryStars, an AI product generating personalized illustrated stories.",
-      "Architected serverless GPU image-generation pipelines (RunPod + FLUX) with identity preservation.",
-      "Built distributed AWS workflows using Step Functions, SQS workers, and Lambda for AI job orchestration.",
-      "Owned API design, authentication, and cloud storage across the platform.",
-    ],
+    place: "Remote, Australia",
+    period: "Feb 2026 — now",
+    note: "AI product features end to end across BlueRock, MyStoryStar and GenieVid AI.",
   },
   {
-    role: "Software Engineer",
-    org: "Independent / Open Source",
-    period: "Ongoing",
-    points: [
-      "Prototype and ship generative-AI tooling, from fine-tuning scripts to inference services.",
-      "Explore the frontier of diffusion models, LoRA training, and production ML infrastructure.",
-    ],
+    title: "Associate Software Engineer",
+    org: "TKXEL",
+    place: "Lahore, Pakistan",
+    period: "Jan 2024 — Jan 2026",
+    note: "Payments, escrow, wallets and real-time messaging for Football Card. Part-time during my final semester, full-time from June 2024.",
+  },
+  {
+    title: "BS Computer Science",
+    org: "FAST NUCES",
+    place: "Lahore, Pakistan",
+    period: "2020 — 2024",
+    note: "",
+  },
+];
+
+export const capabilities: { label: string; items: string[] }[] = [
+  {
+    label: "AI / LLM",
+    items: ["OpenAI APIs", "RAG & embeddings", "Vector search", "Structured outputs", "Guardrails", "Cost & usage tracking"],
+  },
+  {
+    label: "Backend",
+    items: ["Python", "Django & DRF", "Celery & Redis", "Webhooks", "Stripe", "JWT / RBAC"],
+  },
+  {
+    label: "Data & cloud",
+    items: ["PostgreSQL", "Firebase / Firestore", "AWS Lambda", "Step Functions", "Docker", "RunPod"],
+  },
+  {
+    label: "Frontend",
+    items: ["TypeScript", "React", "Next.js", "Remotion"],
   },
 ];
