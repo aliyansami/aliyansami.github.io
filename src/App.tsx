@@ -43,13 +43,18 @@ function Hero() {
       <div className="hero-copy">
         <p className="eyebrow">{profile.role}</p>
         <h1>
-          Production AI that answers from <em>your</em> data, and the backend that keeps it honest.
+          Production AI that answers from your data,{" "}
+          <span className="quiet">and the backend that keeps it reliable.</span>
         </h1>
         <p className="lede">{profile.intro}</p>
-        <p className="hero-links">
-          <a href="#work">Selected work ↓</a>
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>
-        </p>
+        <div className="hero-actions">
+          <a className="button" href={`mailto:${profile.email}`}>
+            Get in touch
+          </a>
+          <a className="button button-quiet" href="#work">
+            View selected work
+          </a>
+        </div>
       </div>
       <figure className="hero-figure">
         <Suspense fallback={<div className="field" aria-hidden="true" />}>
@@ -91,7 +96,11 @@ function Work() {
                     <li key={pt}>{pt}</li>
                   ))}
                 </ul>
-                <p className="work-stack">{p.stack.join(" / ")}</p>
+                <ul className="work-stack" aria-label="Stack">
+                  {p.stack.map((tech) => (
+                    <li key={tech}>{tech}</li>
+                  ))}
+                </ul>
               </div>
             </details>
           </li>
@@ -149,26 +158,31 @@ function About() {
 function Contact() {
   return (
     <section id="contact" className="section contact">
-      <p className="eyebrow">Contact</p>
-      <p className="contact-line">
-        Building something with LLMs that needs to work on a Monday morning?{" "}
-        <a href={`mailto:${profile.email}`}>Write to me.</a>
-      </p>
-      <ul className="contact-links">
-        <li>
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>
-        </li>
-        <li>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn ↗
-          </a>
-        </li>
-        <li>
-          <a href={profile.github} target="_blank" rel="noreferrer">
-            GitHub ↗
-          </a>
-        </li>
-      </ul>
+      <div className="contact-card">
+        <p className="eyebrow">Contact</p>
+        <h2 className="contact-line">Building an AI feature that has to work in production?</h2>
+        <p className="contact-sub">
+          I'm open to freelance projects and full-time roles. Tell me what you're building and where it
+          needs to be.
+        </p>
+        <ul className="contact-links">
+          <li>
+            <a className="button" href={`mailto:${profile.email}`}>
+              {profile.email}
+            </a>
+          </li>
+          <li>
+            <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn ↗
+            </a>
+          </li>
+          <li>
+            <a className="link" href={profile.github} target="_blank" rel="noreferrer">
+              GitHub ↗
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 }
@@ -185,7 +199,7 @@ export default function App() {
       </main>
       <footer className="footer">
         <span>© {new Date().getFullYear()} {profile.name}</span>
-        <span>Set in Instrument Serif and Inter. Figure rendered with Three.js.</span>
+        <span>Built with React and Three.js.</span>
       </footer>
     </>
   );
