@@ -1,8 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { capabilities, profile, projects, roles } from "./data/content";
+import { useEffect, useState } from "react";
+import { capabilities, process, profile, projects, roles, services, trust } from "./data/content";
 
-// Three.js is most of the bundle, so the figure loads after the text.
-const EmbeddingField = lazy(() => import("./components/EmbeddingField"));
+const photoSrc = `${import.meta.env.BASE_URL}${profile.photo}`;
 
 function LocalTime() {
   const format = () =>
@@ -26,6 +25,7 @@ function Header() {
         {profile.name}
       </a>
       <nav aria-label="Sections">
+        <a href="#services">Services</a>
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -43,28 +43,83 @@ function Hero() {
       <div className="hero-copy">
         <p className="eyebrow">{profile.role}</p>
         <h1>
-          Production AI that answers from your data,{" "}
-          <span className="quiet">and the backend that keeps it reliable.</span>
+          Websites and online stores that bring in customers,{" "}
+          <span className="quiet">built by a real engineer you can talk to.</span>
         </h1>
         <p className="lede">{profile.intro}</p>
         <div className="hero-actions">
-          <a className="button" href={`mailto:${profile.email}`}>
-            Get in touch
+          <a className="button" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
+            Get a free mock-up
           </a>
-          <a className="button button-quiet" href="#work">
-            View selected work
+          <a className="button button-quiet" href="#how">
+            How it works
           </a>
         </div>
+        <ul className="hero-proof" aria-label="Why clients trust me">
+          <li>3 years building production software</li>
+          <li>No payment until you approve the design</li>
+          <li>You own your site, domain and code</li>
+        </ul>
       </div>
-      <figure className="hero-figure">
-        <Suspense fallback={<div className="field" aria-hidden="true" />}>
-          <EmbeddingField />
-        </Suspense>
+      <figure className="hero-photo">
+        <img src={photoSrc} alt="Aliyan Sami" width={720} height={960} />
         <figcaption>
-          <span>Fig. 1</span> A query moving through 1,680 embedded chunks, linked to its six nearest
-          neighbours. The retrieval step behind every RAG feature I build.
+          <span>{profile.name}</span> Software engineer based in {profile.location}, working with clients
+          in Australia, the UK, Europe and the US.
         </figcaption>
       </figure>
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="services" className="section">
+      <div className="section-head">
+        <h2>What I can build for you</h2>
+        <p>Fixed quotes · no surprises</p>
+      </div>
+      <div className="services">
+        {services.map((s) => (
+          <article key={s.title} className="service">
+            <h3>{s.title}</h3>
+            <p className="service-for">{s.for}</p>
+            <ul className="work-points">
+              {s.points.map((pt) => (
+                <li key={pt}>{pt}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Trust() {
+  return (
+    <section id="how" className="section">
+      <div className="section-head">
+        <h2>Working with me</h2>
+        <p>Safe, simple, transparent</p>
+      </div>
+      <ol className="process">
+        {process.map((p, i) => (
+          <li key={p.step}>
+            <span className="index tabular">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{p.step}</h3>
+            <p>{p.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="trust">
+        {trust.map((t) => (
+          <div key={t.title} className="trust-item">
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -118,9 +173,20 @@ function About() {
       </div>
       <div className="about-grid">
         <div className="about-text">
+          <img className="about-photo" src={photoSrc} alt="" width={720} height={960} loading="lazy" />
           {profile.about.map((para) => (
             <p key={para}>{para}</p>
           ))}
+          <p className="verify">
+            Check me out:{" "}
+            <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn ↗
+            </a>{" "}
+            ·{" "}
+            <a className="link" href={profile.github} target="_blank" rel="noreferrer">
+              GitHub ↗
+            </a>
+          </p>
         </div>
         <dl className="roles">
           {roles.map((r) => (
@@ -160,10 +226,10 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className="contact-card">
         <p className="eyebrow">Contact</p>
-        <h2 className="contact-line">Building an AI feature that has to work in production?</h2>
+        <h2 className="contact-line">Let's get your business online.</h2>
         <p className="contact-sub">
-          I'm open to freelance projects and full-time roles. Tell me what you're building and where it
-          needs to be.
+          Send me a quick email with your business name and what you need. I'll reply within one working
+          day with a free mock-up offer and a fixed quote. No pressure, no obligation.
         </p>
         <ul className="contact-links">
           <li>
@@ -193,13 +259,15 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <Services />
+        <Trust />
         <Work />
         <About />
         <Contact />
       </main>
       <footer className="footer">
         <span>© {new Date().getFullYear()} {profile.name}</span>
-        <span>Built with React and Three.js.</span>
+        <span>Lahore, Pakistan · Working worldwide</span>
       </footer>
     </>
   );
