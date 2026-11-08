@@ -83,6 +83,7 @@ export const process: { step: string; text: string }[] = [
 ];
 
 export type Project = {
+  slug: string;
   name: string;
   kind: string;
   year: string;
@@ -90,10 +91,14 @@ export type Project = {
   summary: string;
   points: string[];
   stack: string[];
+  /** Screenshot count in public/work/<slug>/, named 1.jpg, 2.jpg, ... */
+  shots: number;
+  tint: string;
 };
 
 export const projects: Project[] = [
   {
+    slug: "folio",
     name: "Folio",
     kind: "AI document Q&A for teams",
     year: "2026",
@@ -107,8 +112,11 @@ export const projects: Project[] = [
       "Document library, usage insights and workspace settings for teams.",
     ],
     stack: ["React", "Python", "OpenAI", "RAG", "Vector search"],
+    shots: 5,
+    tint: "#12b76a",
   },
   {
+    slug: "helpdeck",
     name: "Helpdeck",
     kind: "AI customer-support inbox",
     year: "2026",
@@ -122,8 +130,11 @@ export const projects: Project[] = [
       "Internal notes, assignment, and open, waiting and snoozed queues for the team.",
     ],
     stack: ["React", "Python", "OpenAI", "REST APIs", "Webhooks"],
+    shots: 5,
+    tint: "#7c5cff",
   },
   {
+    slug: "saudi-creative-streams",
     name: "Saudi Creative Streams",
     kind: "Art marketplace & creative community",
     year: "2026",
@@ -137,8 +148,11 @@ export const projects: Project[] = [
       "Artist profiles with likes and view counts on every artwork.",
     ],
     stack: ["React", "REST APIs", "Auth", "Arabic / English"],
+    shots: 3,
+    tint: "#ff4d6d",
   },
   {
+    slug: "coin-bounce",
     name: "Coin Bounce",
     kind: "Crypto news, prices & blogging",
     year: "2024",
@@ -152,6 +166,8 @@ export const projects: Project[] = [
       "Sign-up and login with JWT access and refresh tokens protecting every route.",
     ],
     stack: ["MongoDB", "Express", "React", "Node.js"],
+    shots: 5,
+    tint: "#0ea5e9",
   },
 ];
 

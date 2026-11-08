@@ -1,7 +1,18 @@
-import { useEffect, useState } from "react";
-import { capabilities, process, profile, projects, roles, services, trust } from "./data/content";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { MotionConfig, motion } from "framer-motion";
+import Deck, { spring, type DeckItem } from "./components/Deck";
+import DotField from "./components/DotField";
+import { profile, projects } from "./data/content";
 
-const photoSrc = `${import.meta.env.BASE_URL}${profile.photo}`;
+const items: DeckItem[] = [
+  { id: "about", type: "info" },
+  ...projects.slice(0, 2).map((p): DeckItem => ({ id: p.slug, type: "project", project: p })),
+  { id: "services", type: "info" },
+  ...projects.slice(2).map((p): DeckItem => ({ id: p.slug, type: "project", project: p })),
+  { id: "process", type: "info" },
+  { id: "experience", type: "info" },
+  { id: "contact", type: "info" },
+];
 
 function LocalTime() {
   const format = () =>
@@ -18,257 +29,147 @@ function LocalTime() {
   return <span className="tabular">{time}</span>;
 }
 
-function Header() {
+// Headline: plain words plus a few coloured phrases. Each piece slides up out of its own
+// line box in turn; coloured phrases then get a marker stroke drawn underneath.
+type Piece = { text: string; hl?: string };
+
+const headline: Piece[][] = [
+  [
+    { text: "I design and build" },
+    { text: "websites,", hl: "green" },
+    { text: "online stores", hl: "violet" },
+    { text: "and" },
+    { text: "AI products", hl: "orange" },
+  ],
+  [{ text: "that are a" }, { text: "pleasure", hl: "pink" }, { text: "to use." }],
+];
+
+function Headline() {
+  let n = 0;
   return (
-    <header className="topbar">
-      <a href="#top" className="wordmark">
-        {profile.name}
-      </a>
-      <nav aria-label="Sections">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <p className="topbar-meta">
-        {profile.location} · <LocalTime />
-      </p>
-    </header>
+    <h1>
+      {headline.map((line, li) => (
+        <span key={li} className={li === 1 ? "quiet" : undefined}>
+          {line.flatMap((piece): Piece[] => (piece.hl ? [piece] : piece.text.split(" ").map((t): Piece => ({ text: t })))).map(
+            (piece, i) => {
+              const delay = 0.05 + n++ * 0.04;
+              return (
+                <Fragment key={i}>
+                  <span className={piece.hl ? `word hl hl-${piece.hl}` : "word"}>
+                    <motion.span
+                      className="word-inner"
+                      style={{ "--d": `${delay + 0.45}s` } as React.CSSProperties}
+                      initial={{ y: "105%" }}
+                      animate={{ y: 0 }}
+                      transition={{ ...spring, delay }}
+                    >
+                      {piece.text}
+                    </motion.span>
+                  </span>{" "}
+                </Fragment>
+              );
+            },
+          )}
+        </span>
+      ))}
+    </h1>
   );
 }
 
-function Hero() {
+// Skill pills scattered in the empty side of the intro. Visitors can fling them around.
+const pills = [
+  { label: "React", bg: "#7c5cff", fg: "#fff", x: "8%", y: "10%", r: -8 },
+  { label: "Django", bg: "#12b76a", fg: "#fff", x: "46%", y: "4%", r: 6 },
+  { label: "Shopify", bg: "#ffd43b", fg: "#1a1600", x: "68%", y: "30%", r: -4 },
+  { label: "OpenAI", bg: "#111213", fg: "#fff", x: "22%", y: "36%", r: 4 },
+  { label: "Stripe", bg: "#3b6cff", fg: "#fff", x: "56%", y: "56%", r: -10 },
+  { label: "Next.js", bg: "#ffffff", fg: "#111213", x: "4%", y: "64%", r: 9 },
+  { label: "Python", bg: "#ff4d6d", fg: "#fff", x: "34%", y: "74%", r: -3 },
+  { label: "WooCommerce", bg: "#9ff0c4", fg: "#062014", x: "62%", y: "82%", r: 5 },
+];
+
+function Pills() {
+  const area = useRef<HTMLDivElement>(null);
   return (
-    <section id="top" className="hero">
-      <div className="hero-copy">
-        <p className="eyebrow">{profile.role}</p>
-        <h1>
-          Websites and online stores that bring in customers,{" "}
-          <span className="quiet">built by a real engineer you can talk to.</span>
-        </h1>
-        <p className="lede">{profile.intro}</p>
-        <div className="hero-actions">
-          <a className="button" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
-            Get a free mock-up
-          </a>
-          <a className="button button-quiet" href="#how">
-            How it works
-          </a>
-        </div>
-        <ul className="hero-proof" aria-label="Why clients trust me">
-          <li>3 years building production software</li>
-          <li>No payment until you approve the design</li>
-          <li>You own your site, domain and code</li>
-        </ul>
-      </div>
-      <figure className="hero-photo">
-        <img src={photoSrc} alt="Aliyan Sami" width={720} height={960} />
-        <figcaption>
-          <span>{profile.name}</span> Software engineer based in {profile.location}, working with clients
-          in Australia, the UK, Europe and the US.
-        </figcaption>
-      </figure>
-    </section>
+    <div ref={area} className="pills" aria-hidden="true">
+      {pills.map((p, i) => (
+        <motion.span
+          key={p.label}
+          className="pill"
+          style={{ left: p.x, top: p.y, background: p.bg, color: p.fg }}
+          initial={{ opacity: 0, scale: 0.4, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1, rotate: p.r }}
+          transition={{ type: "spring", stiffness: 420, damping: 18, delay: 0.7 + i * 0.07 }}
+          drag
+          dragConstraints={area}
+          dragElastic={0.25}
+          dragTransition={{ bounceStiffness: 420, bounceDamping: 14 }}
+          whileHover={{ scale: 1.06 }}
+          whileDrag={{ scale: 1.12, rotate: 0, zIndex: 2 }}
+        >
+          {p.label}
+        </motion.span>
+      ))}
+    </div>
   );
 }
 
-function Services() {
-  return (
-    <section id="services" className="section">
-      <div className="section-head">
-        <h2>What I can build for you</h2>
-        <p>Fixed quotes · no surprises</p>
-      </div>
-      <div className="services">
-        {services.map((s) => (
-          <article key={s.title} className="service">
-            <h3>{s.title}</h3>
-            <p className="service-for">{s.for}</p>
-            <ul className="work-points">
-              {s.points.map((pt) => (
-                <li key={pt}>{pt}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Trust() {
-  return (
-    <section id="how" className="section">
-      <div className="section-head">
-        <h2>Working with me</h2>
-        <p>Safe, simple, transparent</p>
-      </div>
-      <ol className="process">
-        {process.map((p, i) => (
-          <li key={p.step}>
-            <span className="index tabular">{String(i + 1).padStart(2, "0")}</span>
-            <h3>{p.step}</h3>
-            <p>{p.text}</p>
-          </li>
-        ))}
-      </ol>
-      <div className="trust">
-        {trust.map((t) => (
-          <div key={t.title} className="trust-item">
-            <h3>{t.title}</h3>
-            <p>{t.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Work() {
-  return (
-    <section id="work" className="section">
-      <div className="section-head">
-        <h2>Selected work</h2>
-        <p>2024 — 2026</p>
-      </div>
-      <ol className="work-list">
-        {projects.map((p, i) => (
-          <li key={p.name}>
-            <details>
-              <summary>
-                <span className="index tabular">{String(i + 1).padStart(2, "0")}</span>
-                <span className="work-name">{p.name}</span>
-                <span className="work-kind">{p.kind}</span>
-                <span className="work-meta">
-                  {p.context}, {p.year}
-                </span>
-                <span className="toggle" aria-hidden="true" />
-              </summary>
-              <div className="work-body">
-                <p className="work-summary">{p.summary}</p>
-                <ul className="work-points">
-                  {p.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
-                  ))}
-                </ul>
-                <ul className="work-stack" aria-label="Stack">
-                  {p.stack.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="section">
-      <div className="section-head">
-        <h2>About</h2>
-      </div>
-      <div className="about-grid">
-        <div className="about-text">
-          <img className="about-photo" src={photoSrc} alt="" width={720} height={960} loading="lazy" />
-          {profile.about.map((para) => (
-            <p key={para}>{para}</p>
-          ))}
-          <p className="verify">
-            Check me out:{" "}
-            <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn ↗
-            </a>{" "}
-            ·{" "}
-            <a className="link" href={profile.github} target="_blank" rel="noreferrer">
-              GitHub ↗
-            </a>
-          </p>
-        </div>
-        <dl className="roles">
-          {roles.map((r) => (
-            <div key={r.org} className="role">
-              <dt>
-                <span className="role-title">{r.title}</span>
-                <span className="role-org">
-                  {r.org}, {r.place}
-                </span>
-              </dt>
-              <dd>
-                <span className="role-period tabular">{r.period}</span>
-                {r.note && <span className="role-note">{r.note}</span>}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-      <div className="capabilities">
-        {capabilities.map((c) => (
-          <div key={c.label}>
-            <h3>{c.label}</h3>
-            <ul>
-              {c.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="section contact">
-      <div className="contact-card">
-        <p className="eyebrow">Contact</p>
-        <h2 className="contact-line">Let's get your business online.</h2>
-        <p className="contact-sub">
-          Send me a quick email with your business name and what you need. I'll reply within one working
-          day with a free mock-up offer and a fixed quote. No pressure, no obligation.
-        </p>
-        <ul className="contact-links">
-          <li>
-            <a className="button" href={`mailto:${profile.email}`}>
-              {profile.email}
-            </a>
-          </li>
-          <li>
-            <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn ↗
-            </a>
-          </li>
-          <li>
-            <a className="link" href={profile.github} target="_blank" rel="noreferrer">
-              GitHub ↗
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-  );
-}
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0, transition: { ...spring, delay } },
+});
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <Trust />
-        <Work />
-        <About />
-        <Contact />
-      </main>
-      <footer className="footer">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
-        <span>Lahore, Pakistan · Working worldwide</span>
-      </footer>
-    </>
+    <MotionConfig reducedMotion="user">
+      <div className="page">
+        <header className="bar">
+          <span className="bar-name">{profile.name}</span>
+          <span className="bar-meta">
+            {profile.location} · <LocalTime />
+          </span>
+          <a className="bar-cta" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
+            <span className="dot" aria-hidden="true" /> Available for projects
+          </a>
+        </header>
+
+        <main>
+          <section className="intro">
+            <DotField />
+            <Pills />
+            <Headline />
+            <motion.p className="intro-sub" {...rise(0.55)}>
+              Software engineer in {profile.location}, working with businesses in Australia, the UK, Europe and
+              the US. Drag the cards below, or click one to open it.
+            </motion.p>
+          </section>
+
+          <motion.section
+            className="deck-wrap"
+            aria-label="Work and information"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.35, delay: 0.35 }}
+          >
+            <Deck items={items} />
+          </motion.section>
+        </main>
+
+        <footer className="foot">
+          <a className="link" href={`mailto:${profile.email}`}>
+            {profile.email}
+          </a>
+          <span className="foot-links">
+            <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+            <a className="link" href={profile.github} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          </span>
+          <span className="foot-copy">© {new Date().getFullYear()}</span>
+        </footer>
+      </div>
+    </MotionConfig>
   );
 }
