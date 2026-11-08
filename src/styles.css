@@ -251,6 +251,10 @@ main {
   touch-action: pan-y;
 }
 
+.deck.is-moving .card {
+  pointer-events: none;
+}
+
 @media (pointer: fine) {
   .deck,
   .deck .card {
@@ -267,14 +271,33 @@ main {
   list-style: none;
   user-select: none;
   -webkit-user-select: none;
+  /* Keep the whole strip on its own GPU layer so sliding never repaints the cards */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .card-slot {
   width: clamp(236px, min(21vw, 36vh), 310px);
   flex: none;
-  /* A soft shadow tinted with the card's own colour */
-  filter: drop-shadow(0 18px 22px color-mix(in srgb, var(--bg) 28%, transparent))
-    drop-shadow(0 2px 3px rgb(0 0 0 / 0.06));
+  position: relative;
+}
+
+/* A soft shadow tinted with the card's own colour. It's a blurred copy drawn once behind the
+   card instead of a live filter, so it costs nothing while the deck slides. */
+.card-slot::before {
+  content: "";
+  position: absolute;
+  inset: 14% 8% -2%;
+  z-index: -1;
+  border-radius: 26px;
+  background: var(--bg);
+  opacity: 0.35;
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.card-slot:has(.card-about)::before {
+  background: #c9c6bc;
 }
 
 .card {

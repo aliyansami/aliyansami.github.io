@@ -22,7 +22,8 @@ export default function DotField() {
     if (!canvas || !ctx) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const dpr = Math.min(window.devicePixelRatio, 2);
+    // Dots are tiny, so a lower canvas resolution looks the same and draws far faster
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
     let width = 0;
     let height = 0;
     let dots: { x: number; y: number; ox: number; oy: number; heat: number }[] = [];
@@ -53,7 +54,9 @@ export default function DotField() {
       }
     }
 
+    // Returns true while any dot is still moving, so the loop can stop when everything is at rest
     function draw() {
+      let moving = false;
       ctx!.clearRect(0, 0, width, height);
       for (const d of dots) {
         const dx = d.ox - pointer.x;
@@ -66,6 +69,7 @@ export default function DotField() {
         d.x += (tx - d.x) * 0.16;
         d.y += (ty - d.y) * 0.16;
         d.heat += (ease - d.heat) * 0.12;
+        if (Math.abs(tx - d.x) > 0.05 || Math.abs(ty - d.y) > 0.05 || Math.abs(ease - d.heat) > 0.005) moving = true;
 
         ctx!.globalAlpha = 0.35 + d.heat * 0.65;
         ctx!.fillStyle = d.heat > 0.08 ? accent : ink;
@@ -74,11 +78,12 @@ export default function DotField() {
         ctx!.fill();
       }
       ctx!.globalAlpha = 1;
+      return moving;
     }
 
     function frame() {
-      draw();
-      raf = requestAnimationFrame(frame);
+      raf = 0;
+      if (draw()) raf = requestAnimationFrame(frame);
     }
     function start() {
       if (reduceMotion || !visible || document.hidden || raf) return;
@@ -91,12 +96,19 @@ export default function DotField() {
 
     const onMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-      pointer.x = e.clientX - rect.left;
-      pointer.y = e.clientY - rect.top;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const near = x > -RADIUS && y > -RADIUS && x < rect.width + RADIUS && y < rect.height + RADIUS;
+      // Ignore the pointer while it's away from the grid (for example over the cards)
+      if (!near && pointer.x === -9999) return;
+      pointer.x = near ? x : -9999;
+      pointer.y = near ? y : -9999;
+      start();
     };
     const onLeave = () => {
       pointer.x = -9999;
       pointer.y = -9999;
+      start();
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave);

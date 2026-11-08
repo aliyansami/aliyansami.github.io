@@ -7,12 +7,15 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useSpring,
+  useVelocity,
   type PanInfo,
 } from "framer-motion";
 import { process, profile, roles, services, trust, capabilities, type Project } from "../data/content";
 
 // One spring for everything that moves, so the deck, cards and overlay feel related.
 export const spring = { type: "spring", stiffness: 380, damping: 36, mass: 0.9 } as const;
+// Softer spring for the deck sliding sideways, so long moves ease in and settle gently
+const glide = { type: "spring", stiffness: 160, damping: 32, mass: 1 } as const;
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const shot = (slug: string, n: number) => asset(`work/${slug}/${n}.jpg`);
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -186,7 +189,7 @@ function Card({
         data-id={item.id}
         style={{ "--bg": m.theme.bg, "--fg": m.theme.fg, visibility: hidden ? "hidden" : "visible" } as React.CSSProperties}
         transition={spring}
-        whileHover={{ y: -8 }}
+        whileHover={{ y: -5 }}
         whileTap={{ scale: 0.985 }}
         onPointerEnter={() => onHover("Open")}
         onPointerLeave={() => onHover("Drag")}
@@ -543,7 +546,15 @@ export default function Deck({ items }: { items: DeckItem[] }) {
 
   const clamp = (v: number) => Math.max(bounds.left, Math.min(0, v));
   const snap = (v: number) => clamp(Math.round(v / bounds.step) * bounds.step);
-  const slideTo = (v: number) => animate(x, snap(v), spring);
+  const slideTo = (v: number) => animate(x, snap(v), glide);
+
+  // While the deck is moving, cards ignore hover so they don't lift as they pass under the cursor
+  const velocity = useVelocity(x);
+  useMotionValueEvent(velocity, "change", (v) => {
+    viewportRef.current?.classList.toggle("is-moving", Math.abs(v) > 30);
+  });
+  const wheelTarget = useRef(0);
+  const wheeling = useRef(false);
 
   // Trackpads scroll sideways; vertical wheel over the deck also moves it, then it settles on a card.
   useEffect(() => {
@@ -554,10 +565,15 @@ export default function Deck({ items }: { items: DeckItem[] }) {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
       if (!delta) return;
       e.preventDefault();
-      x.stop();
-      x.set(clamp(x.get() - delta));
+      // Move a target and let a spring chase it, instead of jumping on every event
+      if (!wheeling.current) wheelTarget.current = x.get();
+      wheeling.current = true;
+      wheelTarget.current = clamp(wheelTarget.current - delta);
+      animate(x, wheelTarget.current, { type: "spring", stiffness: 220, damping: 42, restDelta: 0.5 });
       window.clearTimeout(settle);
-      settle = window.setTimeout(() => slideTo(x.get()), 120);
+      settle = window.setTimeout(() => {
+        wheeling.current = false;
+      }, 200);
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => {
@@ -600,7 +616,7 @@ export default function Deck({ items }: { items: DeckItem[] }) {
     }
     lastOpen.current = openId;
     const i = items.findIndex((it) => it.id === openId);
-    animate(x, snap(-i * bounds.step), spring);
+    animate(x, snap(-i * bounds.step), glide);
     const gap = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${gap}px`;
@@ -628,16 +644,16 @@ export default function Deck({ items }: { items: DeckItem[] }) {
           style={{ x }}
           drag="x"
           dragConstraints={{ left: bounds.left, right: 0 }}
-          dragElastic={0.12}
+          dragElastic={0.1}
           dragTransition={{
-            power: 0.3,
-            timeConstant: 280,
-            modifyTarget: snap,
-            bounceStiffness: 380,
-            bounceDamping: 36,
+            power: 0.4,
+            timeConstant: 450,
+            bounceStiffness: 180,
+            bounceDamping: 34,
           }}
           onDragStart={() => {
             dragDistance.current = 0;
+            wheeling.current = false;
           }}
           onDrag={(_, info: PanInfo) => {
             dragDistance.current = Math.max(dragDistance.current, Math.abs(info.offset.x));
