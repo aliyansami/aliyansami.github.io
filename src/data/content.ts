@@ -106,7 +106,7 @@ export const projects: Project[] = [
     summary:
       "Upload your policies, contracts and manuals, ask questions in plain English, and get answers that cite the exact page they came from.",
     points: [
-      "Reads PDF, Word, Markdown and Excel files, splits them into passages and indexes them for search.",
+      "Reads PDF, Word, Markdown and text files, splits them into passages and indexes them for search.",
       "Answers come only from your documents. If the answer isn't there, Folio says so instead of guessing.",
       "Every claim links to the page and paragraph it came from, so nobody has to take the AI's word for it.",
       "Document library, usage insights and workspace settings for teams.",
