@@ -7,7 +7,6 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useSpring,
-  useVelocity,
   type PanInfo,
 } from "framer-motion";
 import { process, profile, roles, services, trust, capabilities, type Project } from "../data/content";
@@ -548,11 +547,20 @@ export default function Deck({ items }: { items: DeckItem[] }) {
   const snap = (v: number) => clamp(Math.round(v / bounds.step) * bounds.step);
   const slideTo = (v: number) => animate(x, snap(v), glide);
 
-  // While the deck is moving, cards ignore hover so they don't lift as they pass under the cursor
-  const velocity = useVelocity(x);
-  useMotionValueEvent(velocity, "change", (v) => {
-    viewportRef.current?.classList.toggle("is-moving", Math.abs(v) > 30);
+  // While the deck is moving, cards ignore hover so they don't lift as they pass under the cursor.
+  // The flag clears shortly after the last movement, so it can never get stuck on.
+  const movingTimer = useRef(0);
+  const lastX = useRef(0);
+  useMotionValueEvent(x, "change", (v) => {
+    // Ignore the tiny sub-pixel creep at the end of a glide, so clicks work as soon as it looks still
+    const dx = Math.abs(v - lastX.current);
+    lastX.current = v;
+    if (dx < 1) return;
+    viewportRef.current?.classList.add("is-moving");
+    window.clearTimeout(movingTimer.current);
+    movingTimer.current = window.setTimeout(() => viewportRef.current?.classList.remove("is-moving"), 90);
   });
+  useEffect(() => () => window.clearTimeout(movingTimer.current), []);
   const wheelTarget = useRef(0);
   const wheeling = useRef(false);
 
@@ -650,6 +658,10 @@ export default function Deck({ items }: { items: DeckItem[] }) {
             timeConstant: 450,
             bounceStiffness: 180,
             bounceDamping: 34,
+          }}
+          // Reset on every press, so a plain click after an earlier drag isn't mistaken for a drag
+          onPointerDownCapture={() => {
+            dragDistance.current = 0;
           }}
           onDragStart={() => {
             dragDistance.current = 0;
