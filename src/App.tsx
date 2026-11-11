@@ -6,6 +6,7 @@ import { profile, projects } from "./data/content";
 
 const items: DeckItem[] = [
   { id: "about", type: "info" },
+  { id: "examples", type: "info" },
   ...projects.slice(0, 2).map((p): DeckItem => ({ id: p.slug, type: "project", project: p })),
   { id: "services", type: "info" },
   ...projects.slice(2).map((p): DeckItem => ({ id: p.slug, type: "project", project: p })),
@@ -128,9 +129,18 @@ export default function App() {
           <span className="bar-meta">
             {profile.location} · <LocalTime />
           </span>
-          <a className="bar-cta" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
-            <span className="dot" aria-hidden="true" /> Available for projects
-          </a>
+          <span className="bar-actions">
+            <a className="bar-examples" href="examples/">
+              <span className="spark" aria-hidden="true">✦</span>
+              <span className="long">See sample redesigns</span>
+              <span className="short">Examples</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a className="bar-cta" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
+              <span className="dot" aria-hidden="true" /> <span className="long">Available for projects</span>
+              <span className="short">Available</span>
+            </a>
+          </span>
         </header>
 
         <main>

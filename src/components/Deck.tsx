@@ -21,12 +21,16 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 export type DeckItem =
   | { id: string; type: "project"; project: Project }
-  | { id: "about" | "services" | "process" | "experience" | "contact"; type: "info" };
+  | { id: "about" | "examples" | "services" | "process" | "experience" | "contact"; type: "info" };
+
+// Cards that go to another page instead of opening in the overlay
+const links: Record<string, string> = { examples: "examples/" };
 
 type Theme = { bg: string; fg: string };
 
 const infoMeta: Record<string, { title: string; kind: string; theme: Theme }> = {
   about: { title: "About me", kind: "Who you'd be working with", theme: { bg: "#ffffff", fg: "#111213" } },
+  examples: { title: "Sample redesigns", kind: "Before & after makeovers", theme: { bg: "#7c5cff", fg: "#ffffff" } },
   services: { title: "Services", kind: "Websites, stores & AI", theme: { bg: "#ffd43b", fg: "#1a1600" } },
   process: { title: "How it works", kind: "From first call to launch", theme: { bg: "#3b6cff", fg: "#ffffff" } },
   experience: { title: "Experience", kind: "Roles, education & skills", theme: { bg: "#9ff0c4", fg: "#062014" } },
@@ -114,6 +118,18 @@ function Cover({ item }: { item: DeckItem }) {
   switch (item.id) {
     case "about":
       return <img className="cover-img cover-photo" src={asset(profile.photo)} alt="" draggable={false} />;
+    case "examples":
+      return (
+        <span className="cover-ba">
+          <img className="cover-img" src={asset("examples/img/florist-after.webp")} alt="" draggable={false} loading="lazy" />
+          <span className="ba-before">
+            <img src={asset("examples/img/florist-before.webp")} alt="" draggable={false} loading="lazy" />
+            <span className="ba-tag">Before</span>
+          </span>
+          <span className="ba-tag ba-after">After</span>
+          <span className="ba-new">3 makeovers</span>
+        </span>
+      );
     case "services":
       return (
         <ul className="cover-list">
@@ -172,6 +188,7 @@ function Card({
   wasDragged: () => boolean;
 }) {
   const m = meta(item);
+  const href = links[item.id];
   return (
     <motion.li
       className="card-slot"
@@ -190,13 +207,14 @@ function Card({
         transition={spring}
         whileHover={{ y: -5 }}
         whileTap={{ scale: 0.985 }}
-        onPointerEnter={() => onHover("Open")}
+        onPointerEnter={() => onHover(href ? "View" : "Open")}
         onPointerLeave={() => onHover("Drag")}
         onClick={() => {
           if (wasDragged()) return;
-          onOpen(item.id);
+          if (href) window.location.href = asset(href);
+          else onOpen(item.id);
         }}
-        aria-label={`Open ${m.title}: ${m.kind}`}
+        aria-label={href ? `View ${m.title}: ${m.kind}` : `Open ${m.title}: ${m.kind}`}
       >
         <span className="card-top">
           <span className="tabular">{pad(index + 1)}</span>
@@ -608,8 +626,11 @@ export default function Deck({ items }: { items: DeckItem[] }) {
   const step = useCallback(
     (dir: 1 | -1) =>
       setOpenId((cur) => {
-        const i = items.findIndex((it) => it.id === cur);
-        return items[(i + dir + items.length) % items.length].id;
+        // Step through cards that open in the overlay, skipping ones that link elsewhere
+        let i = items.findIndex((it) => it.id === cur);
+        do i = (i + dir + items.length) % items.length;
+        while (links[items[i].id]);
+        return items[i].id;
       }),
     [items],
   );

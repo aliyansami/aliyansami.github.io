@@ -118,6 +118,119 @@ main {
   background: var(--rule);
 }
 
+.bar-actions {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Header link to the examples page: the one bold, colourful thing in the bar */
+.bar-examples {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #6a4cf5;
+  color: #fff;
+  font-weight: 600;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 8px 20px -10px #6a4cf5;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+}
+
+.bar-examples::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%) -150% 0 / 250% 100% no-repeat;
+  animation: bar-shine 4s ease-in-out 1.6s infinite;
+}
+
+@keyframes bar-shine {
+  0%, 60% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
+
+.bar-examples:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -10px #6a4cf5;
+}
+
+.bar-examples .spark {
+  color: #ffd43b;
+}
+
+.bar .short {
+  display: none;
+}
+
+/* Deck card for the examples page: an "after" screenshot with the "before" tucked in front */
+.cover-ba {
+  position: absolute;
+  inset: 0;
+}
+
+.ba-before {
+  position: absolute;
+  left: 9%;
+  bottom: 8%;
+  width: 52%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px -10px rgb(0 0 0 / 0.55), 0 0 0 2px #fff;
+  transform: rotate(-5deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.ba-before img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+.card:hover .ba-before {
+  transform: rotate(-8deg) translate(-4px, -6px);
+}
+
+.ba-tag {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: rgb(17 18 19 / 0.85);
+  color: #fff;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ba-tag.ba-after {
+  left: auto;
+  right: 10px;
+  top: 10px;
+}
+
+.ba-new {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ffd43b;
+  color: #1a1600;
+  font: 600 12px/1 var(--sans);
+  transform: rotate(4deg);
+  box-shadow: 0 8px 16px -8px rgb(0 0 0 / 0.5);
+}
+
 .dot {
   width: 7px;
   height: 7px;
@@ -990,9 +1103,34 @@ main {
   }
 }
 
+@media (max-width: 640px) {
+  .bar .long {
+    display: none;
+  }
+
+  .bar .short {
+    display: inline;
+  }
+}
+
 @media (max-width: 420px) {
-  .bar-cta {
+  .bar {
+    gap: 8px;
+  }
+
+  .bar-cta,
+  .bar-examples {
     font-size: 13px;
     padding: 6px 11px;
+  }
+
+  .bar-actions {
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-examples::after {
+    animation: none;
   }
 }
