@@ -6,38 +6,182 @@
 <title>Juniper &amp; Thistle Flowers (sample redesign)</title>
 <meta name="description" content="Sample homepage redesign for a fictional independent florist, by Aliyan Sami.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#7a2f4f">
+<meta name="theme-color" content="#12251b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/after.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/flair.css">
 <style>
-  :root { --brand: #7a2f4f; --brand-soft: #f6e4ea; --accent: #e88aa6; --bg: #fdf8f4; --surface: #ffffff; --ink: #2a1a20; --ink-2: #6a5860; --line: #efe2dc; --radius: 20px; --display: "Fraunces", Georgia, serif; --body: "DM Sans", system-ui, sans-serif; }
-  h1, h2, h3, .logo { font-weight: 600; letter-spacing: -0.015em; }
-  .hero { background: radial-gradient(900px 520px at 88% 10%, #f9dfe7 0, transparent 60%), radial-gradient(600px 400px at 0% 100%, #eaf1e3 0, transparent 60%); }
-  .hero h1 em { font-style: italic; }
-  .hero-art { position: relative; }
-  .hero-art .bq { display: none; position: absolute; width: 190px; right: -20px; top: -150px; filter: drop-shadow(0 18px 20px rgb(122 47 79 / 0.18)); }
-  .size { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
-  .size .slot b { display: block; font-size: 12px; font-weight: 500; color: inherit; opacity: 0.75; margin-top: 4px; }
-  .card-icon { background: #edf3e6; color: #4f7a52; }
-  .product-art.p1 { background: #fbe7ee; } .product-art.p2 { background: #f6f1ec; } .product-art.p3 { background: #fbe9e4; } .product-art.p4 { background: #efeaf9; }
-  .product h3 { font-size: 20px; }
-  .product .price { margin: 0; padding: 0; }
-  .delivery { display: grid; gap: 14px; }
-  @media (min-width: 640px) { .delivery { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 960px) { .hero-art .bq { display: block; } }
+  :root { --bg: #f7f0e6; --ink: #1d2a22; --ink-2: #5d6b62; --forest: #12251b; --cream: #f7f0e6; --blush: #f4a6bd; --gold: #d8b06a; --brand: #b23a5e; --display: "Fraunces", Georgia, serif; --body: "Manrope", system-ui, sans-serif; --focus: #d8b06a; }
+  .serif-i { font-family: var(--display); font-style: italic; font-weight: 400; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 28px; border-radius: 999px; font: 700 15px/1 var(--body); letter-spacing: 0.01em; text-decoration: none; border: 0; cursor: pointer; transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background 0.2s, color 0.2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-gold { background: var(--gold); color: var(--forest); }
+  .btn-gold:hover { background: #e6c283; }
+  .btn-ghost { color: var(--cream); box-shadow: inset 0 0 0 1.5px rgb(247 240 230 / 0.4); }
+  .btn-ghost:hover { background: rgb(247 240 230 / 0.08); }
+  .btn-forest { background: var(--forest); color: var(--cream); }
+  .btn-forest:hover { background: #1e3a2b; }
+
+  /* Header over the dark hero */
+  .head { position: sticky; top: 0; z-index: 20; background: rgb(18 37 27 / 0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: var(--cream); border-bottom: 1px solid rgb(247 240 230 / 0.1); }
+  .head .wrap { display: flex; align-items: center; gap: 24px; height: 74px; }
+  .logo { font: 600 23px/1 var(--display); letter-spacing: -0.02em; text-decoration: none; margin-right: auto; }
+  .logo em { font-style: italic; font-weight: 400; color: var(--blush); }
+  .nav { display: none; gap: 28px; font-size: 14.5px; font-weight: 500; }
+  .nav a { text-decoration: none; opacity: 0.8; transition: opacity 0.15s; } .nav a:hover { opacity: 1; }
+  .basket { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(247 240 230 / 0.35); text-decoration: none; }
+  .basket svg { width: 20px; height: 20px; }
+  .basket b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: 999px; background: var(--blush); color: var(--forest); font: 700 11px/20px var(--body); text-align: center; }
+  .basket.bump { animation: bump 0.45s cubic-bezier(0.3, 1.8, 0.6, 1); }
+  @keyframes bump { 40% { transform: scale(1.25) rotate(-8deg); } }
+  .head .btn { min-height: 44px; padding: 0 20px; font-size: 14px; display: none; }
+
+  /* Hero */
+  .hero { position: relative; background: var(--forest); color: var(--cream); overflow: hidden; padding: 44px 0 0; isolation: isolate; }
+  .hero::before { content: ""; position: absolute; inset: auto -10% -40% 30%; height: 90%; z-index: -1; background: radial-gradient(closest-side, rgb(244 166 189 / 0.28), transparent); }
+  .hero .wrap { display: grid; gap: 38px; align-items: end; }
+  .countdown { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 10px; border-radius: 999px; background: rgb(247 240 230 / 0.08); box-shadow: inset 0 0 0 1px rgb(247 240 230 / 0.16); font-size: 14px; font-weight: 600; }
+  .countdown::before { content: "🚚"; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--gold); font-size: 14px; }
+  .hero h1 { font-size: clamp(54px, 12vw, 132px); font-weight: 400; letter-spacing: -0.045em; line-height: 0.9; margin: 24px 0 24px; }
+  .hero h1 em { font-style: italic; color: var(--blush); }
+  .hero h1 .u { position: relative; display: inline-block; }
+  .hero h1 .u::after { content: ""; position: absolute; left: 4%; right: 2%; bottom: 0.06em; height: 0.08em; border-radius: 9px; background: var(--gold); transform-origin: left; transform: scaleX(0); animation: grow 1s 0.9s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
+  @keyframes grow { to { transform: scaleX(1); } }
+  .lead { font-size: clamp(17px, 2vw, 19px); color: rgb(247 240 230 / 0.75); max-width: 30em; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 44px; }
+  .ctas .btn { flex: 1 1 auto; }
+  .arch { position: relative; justify-self: center; width: min(100%, 460px); aspect-ratio: 4 / 5; border-radius: 999px 999px 0 0; background: linear-gradient(180deg, #f9d9e2, #f2bccb 70%, #eaa8bb); overflow: hidden; box-shadow: inset 0 0 0 10px rgb(255 255 255 / 0.18); --c1:#c2263b;--c2:#e86a6a;--c3:#8d1630;--c4:#ffe4e1; }
+  .arch .hero-bq { position: absolute; left: 50%; bottom: -4%; width: 92%; transform: translateX(-50%); }
+  .arch .sun { position: absolute; width: 46%; aspect-ratio: 1; border-radius: 50%; left: 27%; top: 10%; background: radial-gradient(circle, #fff6e0, rgb(255 246 224 / 0)); animation: glow 5s ease-in-out infinite; }
+  @keyframes glow { 50% { transform: scale(1.12); opacity: 0.7; } }
+  .tagcard { position: absolute; z-index: 2; right: 8%; top: 22%; background: var(--cream); color: var(--ink); padding: 12px 16px; border-radius: 4px 16px 16px 16px; box-shadow: 0 20px 30px -14px rgb(0 0 0 / 0.5); transform: rotate(6deg); font-size: 13px; animation: sway 6s ease-in-out infinite; transform-origin: top left; }
+  .tagcard b { display: block; font: italic 400 20px/1.1 var(--display); }
+  @keyframes sway { 50% { transform: rotate(2deg); } }
+
+  /* Bouquet animation */
+  .bq .bloom { transform: scale(0); animation: blossom 1.1s calc(var(--d) + 0.3s) cubic-bezier(0.3, 1.5, 0.5, 1) forwards; transform-box: view-box; }
+  @keyframes blossom { to { transform: scale(1); } }
+  .bq .leaves, .bq .sprig { transform-origin: 120px 250px; transform-box: view-box; animation: breeze 7s ease-in-out infinite; }
+  .bq .sprig { animation-duration: 5s; }
+  @keyframes breeze { 50% { transform: rotate(1.6deg); } }
+  .bq .bloom g, .bq .bloom circle { transition: fill 0.5s ease; }
+
+  /* Occasions marquee */
+  .occ { background: var(--blush); color: var(--forest); padding: 20px 0; --gap: 36px; --speed: 36s; }
+  .occ span { font: italic 400 clamp(26px, 4vw, 42px)/1 var(--display); letter-spacing: -0.02em; }
+  .occ em { font-style: normal; font-size: 22px; align-self: center; }
+
+  section.s { padding: clamp(80px, 11vw, 130px) 0; }
+  .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand); }
+  .s h2 { font-size: clamp(40px, 6.5vw, 76px); font-weight: 400; letter-spacing: -0.04em; line-height: 0.95; margin-top: 14px; max-width: 12em; }
+  .s h2 em { font-style: italic; color: var(--brand); }
+  .sub { color: var(--ink-2); font-size: 18px; margin-top: 16px; max-width: 34em; }
+
+  /* Builder */
+  .builder { display: grid; gap: 26px; margin-top: 46px; align-items: center; }
+  .stage { position: relative; border-radius: 32px; background: radial-gradient(70% 60% at 50% 40%, #fff, #efe4d6); aspect-ratio: 1; display: grid; place-items: center; overflow: hidden; --c1:#f4a6bd;--c2:#ffd6c9;--c3:#d9577f;--c4:#fff3c4; transition: background 0.5s; }
+  .stage .bq { width: 72%; transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1); }
+  .stage[data-size="classic"] .bq { transform: scale(0.84); } .stage[data-size="luxe"] .bq { transform: scale(1.12); }
+  .stage .card-note { position: absolute; right: 6%; top: 7%; transform: rotate(4deg); background: #fff; padding: 10px 16px; border-radius: 6px; font: italic 400 17px/1.3 var(--display); box-shadow: 0 14px 24px -12px rgb(0 0 0 / 0.35); max-width: 80%; text-align: center; min-height: 1em; }
+  .controls { display: grid; gap: 22px; }
+  .ctl h3 { font: 700 13px/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sw { border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1.5px rgb(29 42 34 / 0.12); font-weight: 600; font-size: 14px; transition: box-shadow 0.15s, transform 0.15s; }
+  .sw:hover { transform: translateY(-2px); }
+  .sw i { width: 30px; height: 30px; border-radius: 50%; background: conic-gradient(var(--c1) 0 33%, var(--c2) 0 66%, var(--c3) 0); }
+  .sw.on { box-shadow: inset 0 0 0 2px var(--ink); }
+  .sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .sz { border: 0; cursor: pointer; padding: 14px 0; border-radius: 18px; background: #fff; box-shadow: inset 0 0 0 1.5px rgb(29 42 34 / 0.12); font-weight: 700; transition: background 0.15s, color 0.15s; }
+  .sz small { display: block; font-weight: 500; font-size: 13px; opacity: 0.7; margin-top: 3px; }
+  .sz.on { background: var(--forest); color: var(--cream); box-shadow: none; }
+  .ctl input { width: 100%; font: 400 16px/1.4 var(--body); padding: 14px 16px; border-radius: 16px; border: 1.5px solid rgb(29 42 34 / 0.15); background: #fff; color: var(--ink); }
+  .ctl input:focus { outline: none; border-color: var(--forest); box-shadow: 0 0 0 4px rgb(18 37 27 / 0.12); }
+  .total { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 6px; }
+  .total strong { font: 400 40px/1 var(--display); letter-spacing: -0.03em; }
+  .total small { display: block; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+
+  /* Shop rail */
+  .rail-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 320px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 40px clamp(18px, 4vw, 44px) 20px; margin: 0 calc(-1 * clamp(18px, 4vw, 44px)); scrollbar-width: thin; }
+  .prod { scroll-snap-align: start; border-radius: 28px; background: #fff; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.35s; box-shadow: 0 1px 0 rgb(29 42 34 / 0.06); }
+  .prod:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -30px rgb(29 42 34 / 0.45); }
+  .prod-art { aspect-ratio: 1; display: grid; place-items: end center; background: radial-gradient(80% 70% at 50% 35%, color-mix(in srgb, var(--c1) 35%, #fff), color-mix(in srgb, var(--c2) 30%, #f7f0e6)); }
+  .prod-art .bq { width: 74%; transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1); }
+  .prod:hover .prod-art .bq { transform: scale(1.06) rotate(-2deg); }
+  .prod-body { padding: 20px 22px 22px; display: grid; gap: 6px; }
+  .prod h3 { font: 400 26px/1.05 var(--display); letter-spacing: -0.02em; }
+  .prod p { color: var(--ink-2); font-size: 14.5px; }
+  .prod-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .price { font-weight: 700; }
+  .add { border: 0; cursor: pointer; padding: 10px 16px; border-radius: 999px; background: var(--forest); color: var(--cream); font-weight: 700; font-size: 14px; transition: transform 0.15s, background 0.15s; }
+  .add:hover { background: var(--brand); } .add:active { transform: scale(0.94); }
+
+  /* Delivery steps */
+  .deliv { display: grid; gap: 14px; margin-top: 44px; }
+  .dv { padding: 28px; border-radius: 28px; background: #fff; display: grid; gap: 10px; }
+  .dv span { font: italic 400 54px/1 var(--display); color: var(--blush); }
+  .dv h3 { font: 400 26px/1.1 var(--display); }
+  .dv p { color: var(--ink-2); }
+
+  /* Reviews */
+  .revs { display: grid; gap: 16px; margin-top: 44px; }
+  .rev { padding: 30px; border-radius: 28px; background: var(--forest); color: var(--cream); display: grid; gap: 16px; }
+  .rev:nth-child(2) { background: var(--brand); } .rev:nth-child(3) { background: #3f6b4a; }
+  .rev blockquote { margin: 0; font: italic 400 22px/1.3 var(--display); }
+  .rev footer { display: flex; justify-content: space-between; font-size: 14px; opacity: 0.8; }
+  .stars { color: var(--gold); letter-spacing: 2px; }
+
+  /* Weddings + visit */
+  .wed { background: var(--forest); color: var(--cream); border-radius: 36px; padding: clamp(28px, 6vw, 64px); display: grid; gap: 34px; position: relative; overflow: hidden; }
+  .wed::after { content: "❀"; position: absolute; right: -30px; top: -70px; font-size: 280px; color: rgb(244 166 189 / 0.08); line-height: 1; animation: spin 60s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .wed h2 em { color: var(--blush); }
+  .wed .sub { color: rgb(247 240 230 / 0.72); }
+  .wed form { display: grid; gap: 14px; position: relative; z-index: 1; --field-bg: rgb(247 240 230 / 0.06); --field-line: rgb(247 240 230 / 0.18); --brand: #d8b06a; }
+  .wed .field input, .wed .field textarea { color: var(--cream); }
+  .wed [role=status] { color: var(--gold); font-weight: 600; font-size: 14px; min-height: 1em; }
+  .visit { display: grid; gap: 16px; margin-top: 44px; }
+  .vcard { padding: 28px; border-radius: 28px; background: #fff; }
+  .vcard h3 { font: 400 28px/1.1 var(--display); margin-bottom: 12px; }
+  [data-hours] { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgb(29 42 34 / 0.08); }
+  .hours li:last-child { border: 0; }
+  .map { position: relative; min-height: 260px; border-radius: 28px; overflow: hidden; background: linear-gradient(90deg, transparent 44%, #fff 44%, #fff 47%, transparent 47%), linear-gradient(0deg, transparent 52%, #fff 52%, #fff 55%, transparent 55%), radial-gradient(circle at 75% 25%, #cfe3c4 0 16%, transparent 16.5%), repeating-linear-gradient(0deg, #ece2d4 0 1px, transparent 1px 30px), repeating-linear-gradient(90deg, #ece2d4 0 1px, transparent 1px 30px), #f3ebdf; }
+  .map .pin { position: absolute; left: 45.5%; top: 53.5%; transform: translate(-50%, -100%); background: var(--forest); color: var(--cream); padding: 8px 14px; border-radius: 999px; font: italic 400 16px/1 var(--display); white-space: nowrap; box-shadow: 0 12px 20px -10px rgb(0 0 0 / 0.5); }
+  .map .pin::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; background: var(--forest); transform: translateX(-50%) rotate(45deg); }
+  .map small { position: absolute; left: 14px; bottom: 12px; font-size: 11px; color: var(--ink-2); }
+  .addr { margin-top: 16px; color: var(--ink-2); } .addr b { display: block; color: var(--ink); }
+
+  .foot { padding: 40px 0 120px; font-size: 14px; color: var(--ink-2); }
+  .foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+
+  @media (min-width: 720px) {
+    .ctas .btn { flex: 0 0 auto; }
+    .deliv, .revs { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .nav, .head .btn { display: flex; }
+    .hero { padding-top: 70px; }
+    .hero .wrap { grid-template-columns: 1.15fr 0.85fr; gap: 50px; }
+    .ctas { margin-bottom: 90px; }
+    .builder { grid-template-columns: 1fr 1fr; gap: 56px; }
+    .wed { grid-template-columns: 1fr 1fr; align-items: center; }
+    .visit { grid-template-columns: 0.8fr 1.2fr; }
+    .foot { padding-bottom: 40px; }
+  }
 </style>
 </head>
 <body>
 <div class="demo-bar">Sample redesign of a fictional shop by Aliyan Sami. Not a real business. <a href="../">See all examples</a> · <a href="before.html">See the "before"</a></div>
 
-<header class="site-head">
+<header class="head">
   <div class="wrap">
-    <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></span>Juniper &amp; Thistle</a>
-    <nav class="nav" aria-label="Main"><a href="#shop">Shop</a><a href="#delivery">Delivery</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a></nav>
-    <a class="btn btn-ghost head-call" href="#contact">Weddings &amp; events</a>
-    <a class="btn btn-primary" href="#shop">Shop flowers</a>
+    <a class="logo" href="#top">Juniper <em>&amp;</em> Thistle</a>
+    <nav class="nav" aria-label="Main"><a href="#build">Build a bouquet</a><a href="#shop">Shop</a><a href="#weddings">Weddings</a><a href="#visit">Visit</a></nav>
+    <a class="btn btn-gold" href="#shop">Shop flowers</a>
+    <a class="basket" href="#shop" aria-label="Basket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><b data-cart-count>0</b></a>
   </div>
 </header>
 
@@ -45,98 +189,137 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <p class="eyebrow">Independent florist · Same-day local delivery</p>
-        <h1>Seasonal flowers, <em>hand-tied</em> and delivered today.</h1>
-        <p class="hero-lead">Fresh bouquets for birthdays, thank-yous and just-because. Order online in two minutes; order by 1pm for same-day delivery.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="#shop">Shop bouquets</a>
-          <a class="btn btn-ghost" href="#contact">Wedding flowers</a>
+        <span class="countdown" data-cutoff="13" data-reveal="0">Order by 1pm for delivery today</span>
+        <h1 data-reveal="1">Flowers that say it <em class="u">better.</em></h1>
+        <p class="lead" data-reveal="2">Seasonal, hand-tied bouquets from an independent florist. Build your own in a few taps, add a handwritten card, and we'll deliver it today.</p>
+        <div class="ctas" data-reveal="3"><a class="btn btn-gold" href="#build">Build your bouquet</a><a class="btn btn-ghost" href="#shop">Shop this week's flowers</a></div>
+      </div>
+      <div class="arch" data-reveal="2">
+        <span class="sun" aria-hidden="true"></span>
+        <svg class="bq hero-bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg>
+        <div class="tagcard"><b>Happy birthday, Mum</b>Handwritten card, included</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="occ marquee" aria-hidden="true"><div class="marquee-track">
+    <span>Birthdays</span><em>❀</em><span>Thank you</span><em>❀</em><span>New baby</span><em>❀</em><span>Anniversaries</span><em>❀</em><span>Just because</span><em>❀</em><span>Sympathy</span><em>❀</em><span>Weddings</span><em>❀</em>
+    <span>Birthdays</span><em>❀</em><span>Thank you</span><em>❀</em><span>New baby</span><em>❀</em><span>Anniversaries</span><em>❀</em><span>Just because</span><em>❀</em><span>Sympathy</span><em>❀</em><span>Weddings</span><em>❀</em>
+  </div></div>
+
+  <section class="s" id="build">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Build a bouquet</p>
+      <h2 data-reveal="1">Make it <em>yours</em> in three taps.</h2>
+      <div class="builder">
+        <div class="stage" id="stage" data-size="generous" data-reveal="0">
+          <svg class="bq" viewBox="0 0 240 300" aria-hidden="true" id="builder-bq"><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg>
+          <p class="card-note" id="note-out">Thinking of you x</p>
         </div>
-        <ul class="hero-facts"><li>Order by 1pm, delivered today</li><li>Secure checkout</li><li>Handwritten card included</li></ul>
-      </div>
-
-      <div class="hero-art">
-        <div class="bq"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#e88aa6"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#c9577a"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#e88aa6"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div>
-        <div class="widget" id="order" aria-label="Quick order (demo)">
-          <div class="widget-head"><h2>Florist's choice</h2></div>
-          <div class="size" data-pick><button class="slot" aria-pressed="false">Classic<b>$45</b></button><button class="slot on" aria-pressed="true">Generous<b>$65</b></button><button class="slot" aria-pressed="false">Luxe<b>$90</b></button></div>
-          <div class="chips" data-pick><button class="chip on" aria-pressed="true">Today</button><button class="chip" aria-pressed="false">Tomorrow</button><button class="chip" aria-pressed="false">Pick a date</button></div>
-          <a class="btn btn-primary" href="#shop">Add to basket · $65</a>
-          <p class="widget-note">Demo shop: would use Shopify or Stripe checkout.</p>
+        <div class="controls" data-reveal="1" aria-label="Bouquet builder (demo)">
+          <div class="ctl"><h3>1 · Colour palette</h3>
+            <div class="swatches" id="palette" data-pick>
+              <button class="sw on" aria-pressed="true" style="--c1:#f4a6bd;--c2:#ffd6c9;--c3:#d9577f;--c4:#fff3c4" data-pal="--c1:#f4a6bd;--c2:#ffd6c9;--c3:#d9577f;--c4:#fff3c4"><i></i>Blush</button>
+              <button class="sw" aria-pressed="false" style="--c1:#ff9b6a;--c2:#ffd166;--c3:#e4572e;--c4:#fff3c4" data-pal="--c1:#ff9b6a;--c2:#ffd166;--c3:#e4572e;--c4:#fff3c4"><i></i>Sunset</button>
+              <button class="sw" aria-pressed="false" style="--c1:#c2263b;--c2:#e86a6a;--c3:#8d1630;--c4:#ffe4e1" data-pal="--c1:#c2263b;--c2:#e86a6a;--c3:#8d1630;--c4:#ffe4e1"><i></i>Ruby</button>
+              <button class="sw" aria-pressed="false" style="--c1:#b9a4ff;--c2:#ffe066;--c3:#7b61d1;--c4:#ffffff" data-pal="--c1:#b9a4ff;--c2:#ffe066;--c3:#7b61d1;--c4:#ffffff"><i></i>Meadow</button>
+              <button class="sw" aria-pressed="false" style="--c1:#fffaf2;--c2:#f3e3d3;--c3:#e7cbb4;--c4:#d8e7c9" data-pal="--c1:#fffaf2;--c2:#f3e3d3;--c3:#e7cbb4;--c4:#d8e7c9"><i></i>Ivory</button>
+            </div>
+          </div>
+          <div class="ctl"><h3>2 · Size</h3>
+            <div class="sizes" id="size" data-pick>
+              <button class="sz" aria-pressed="false" data-size="classic" data-price="45">Classic<small>$45</small></button>
+              <button class="sz on" aria-pressed="true" data-size="generous" data-price="65">Generous<small>$65</small></button>
+              <button class="sz" aria-pressed="false" data-size="luxe" data-price="90">Luxe<small>$90</small></button>
+            </div>
+          </div>
+          <div class="ctl"><h3>3 · Card message</h3><input id="note" maxlength="60" value="Thinking of you x" aria-label="Card message"></div>
+          <div class="total"><div><strong id="total">$65</strong><small data-cutoff="13">Order by 1pm for delivery today</small></div><button class="btn btn-forest" data-add="Your bouquet">Add to basket</button></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="alt" id="shop">
+  <section class="s" id="shop" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Shop</p><h2>This week's bouquets</h2><p>Made fresh each morning from what's best at the market, so every bouquet is a little different.</p></div>
-      <div class="cards four">
-        <article class="card product"><div class="product-art p1"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#e88aa6"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#c9577a"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#e88aa6"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>The Juniper</h3><p>Garden roses, sweet peas and soft greenery.</p><div class="product-row"><p class="price">from $55</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
-        <article class="card product"><div class="product-art p2"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#f6d6e0"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#ffffff"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#e9a3b8"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#ffffff"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#f6d6e0"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Blush &amp; Ivory</h3><p>Soft whites and pinks; lovely for new babies and thank-yous.</p><div class="product-row"><p class="price">from $60</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
-        <article class="card product"><div class="product-art p3"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#c64b4b"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#e07a5f"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#a8323e"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#e07a5f"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#c64b4b"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Red Thistle</h3><p>Deep reds and coral for anniversaries and romance.</p><div class="product-row"><p class="price">from $70</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
-        <article class="card product"><div class="product-art p4"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#b9a7e8"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f2c14e"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#8e7cc3"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f2c14e"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#b9a7e8"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Meadow Lilac</h3><p>Lilac, lavender and a pop of yellow. Bright and cheerful.</p><div class="product-row"><p class="price">from $50</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
+      <div class="rail-head"><div><p class="eyebrow" data-reveal>Shop</p><h2 data-reveal="1">This week's <em>bouquets.</em></h2></div><p class="sub" data-reveal="2" style="margin:0">Swipe to browse. Made fresh each morning.</p></div>
+      <div class="rail"><article class="prod" data-reveal="0"><div class="prod-art" style="--c1:#f4a6bd;--c2:#ffd6c9;--c3:#d9577f;--c4:#fff3c4"><svg class="bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg></div><div class="prod-body"><h3>The Juniper</h3><p>Garden roses, sweet peas and soft greenery.</p><div class="prod-row"><span class="price">from $55</span><button class="add" data-add="The Juniper" aria-label="Add The Juniper to basket">Add +</button></div></div></article><article class="prod" data-reveal="1"><div class="prod-art" style="--c1:#ff9b6a;--c2:#ffd166;--c3:#e4572e;--c4:#fff3c4"><svg class="bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg></div><div class="prod-body"><h3>Golden Hour</h3><p>Warm oranges and sunshine yellows to lift any day.</p><div class="prod-row"><span class="price">from $60</span><button class="add" data-add="Golden Hour" aria-label="Add Golden Hour to basket">Add +</button></div></div></article><article class="prod" data-reveal="2"><div class="prod-art" style="--c1:#c2263b;--c2:#e86a6a;--c3:#8d1630;--c4:#ffe4e1"><svg class="bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg></div><div class="prod-body"><h3>Red Thistle</h3><p>Deep reds for anniversaries and big romance.</p><div class="prod-row"><span class="price">from $70</span><button class="add" data-add="Red Thistle" aria-label="Add Red Thistle to basket">Add +</button></div></div></article><article class="prod" data-reveal="3"><div class="prod-art" style="--c1:#b9a4ff;--c2:#ffe066;--c3:#7b61d1;--c4:#ffffff"><svg class="bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg></div><div class="prod-body"><h3>Meadow Lilac</h3><p>Lilac, lavender and a pop of yellow.</p><div class="prod-row"><span class="price">from $50</span><button class="add" data-add="Meadow Lilac" aria-label="Add Meadow Lilac to basket">Add +</button></div></div></article><article class="prod" data-reveal="4"><div class="prod-art" style="--c1:#fffaf2;--c2:#f3e3d3;--c3:#e7cbb4;--c4:#d8e7c9"><svg class="bq" viewBox="0 0 240 300" aria-hidden="true" ><g stroke="#3f6b4a" stroke-width="4" stroke-linecap="round" fill="none"><path d="M120 250 Q 112 170 78 104"/><path d="M120 250 Q 120 160 120 80"/><path d="M120 250 Q 130 170 164 108"/><path d="M120 250 Q 98 190 52 150"/><path d="M120 250 Q 146 190 190 152"/></g><g class="leaves" fill="#5c8f62"><path d="M70 186 q -36 -10 -44 -38 q 34 4 44 38z"/><path d="M170 186 q 36 -10 44 -38 q -34 4 -44 38z"/><path d="M96 150 q -30 -24 -26 -54 q 26 18 26 54z" fill="#4c7f55"/><path d="M146 150 q 30 -24 26 -54 q -26 18 -26 54z" fill="#4c7f55"/></g><g fill="var(--c4,#fff3c4)" class="sprig"><circle cx="100" cy="40" r="5"/><circle cx="92" cy="30" r="4"/><circle cx="146" cy="44" r="5"/><circle cx="154" cy="34" r="4"/><circle cx="34" cy="120" r="4"/><circle cx="206" cy="124" r="4"/></g><g class="bloom" style="--d:0.2s;transform-origin:78px 100px"><g fill="var(--c1)"><ellipse cx="78.0" cy="74.8" rx="23.9" ry="20.2" transform="rotate(0 78.0 74.8)"/><ellipse cx="101.9" cy="92.2" rx="23.9" ry="20.2" transform="rotate(72 101.9 92.2)"/><ellipse cx="92.9" cy="120.4" rx="23.9" ry="20.2" transform="rotate(144 92.9 120.4)"/><ellipse cx="63.1" cy="120.4" rx="23.9" ry="20.2" transform="rotate(216 63.1 120.4)"/><ellipse cx="54.1" cy="92.2" rx="23.9" ry="20.2" transform="rotate(288 54.1 92.2)"/></g><circle cx="78" cy="100" r="13.9" fill="var(--c4,#fff3c4)"/><circle cx="78" cy="100" r="6.3" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.35s;transform-origin:164px 104px"><g fill="var(--c2)"><ellipse cx="164.0" cy="80.0" rx="22.8" ry="19.2" transform="rotate(0 164.0 80.0)"/><ellipse cx="186.8" cy="96.6" rx="22.8" ry="19.2" transform="rotate(72 186.8 96.6)"/><ellipse cx="178.2" cy="123.4" rx="22.8" ry="19.2" transform="rotate(144 178.2 123.4)"/><ellipse cx="149.8" cy="123.4" rx="22.8" ry="19.2" transform="rotate(216 149.8 123.4)"/><ellipse cx="141.2" cy="96.6" rx="22.8" ry="19.2" transform="rotate(288 141.2 96.6)"/></g><circle cx="164" cy="104" r="13.2" fill="var(--c4,#fff3c4)"/><circle cx="164" cy="104" r="6.0" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.5s;transform-origin:52px 150px"><g fill="var(--c2)"><ellipse cx="52.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 52.0 132.0)"/><ellipse cx="69.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 69.1 144.4)"/><ellipse cx="62.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 62.6 164.6)"/><ellipse cx="41.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 41.4 164.6)"/><ellipse cx="34.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 34.9 144.4)"/></g><circle cx="52" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="52" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.6s;transform-origin:190px 150px"><g fill="var(--c1)"><ellipse cx="190.0" cy="132.0" rx="17.1" ry="14.4" transform="rotate(0 190.0 132.0)"/><ellipse cx="207.1" cy="144.4" rx="17.1" ry="14.4" transform="rotate(72 207.1 144.4)"/><ellipse cx="200.6" cy="164.6" rx="17.1" ry="14.4" transform="rotate(144 200.6 164.6)"/><ellipse cx="179.4" cy="164.6" rx="17.1" ry="14.4" transform="rotate(216 179.4 164.6)"/><ellipse cx="172.9" cy="144.4" rx="17.1" ry="14.4" transform="rotate(288 172.9 144.4)"/></g><circle cx="190" cy="150" r="9.9" fill="var(--c4,#fff3c4)"/><circle cx="190" cy="150" r="4.5" fill="#000" opacity=".12"/></g><g class="bloom" style="--d:0.05s;transform-origin:120px 74px"><g fill="var(--c3)"><ellipse cx="120.0" cy="46.4" rx="26.2" ry="22.1" transform="rotate(0 120.0 46.4)"/><ellipse cx="146.2" cy="65.4" rx="26.2" ry="22.1" transform="rotate(72 146.2 65.4)"/><ellipse cx="136.3" cy="96.4" rx="26.2" ry="22.1" transform="rotate(144 136.3 96.4)"/><ellipse cx="103.7" cy="96.4" rx="26.2" ry="22.1" transform="rotate(216 103.7 96.4)"/><ellipse cx="93.8" cy="65.4" rx="26.2" ry="22.1" transform="rotate(288 93.8 65.4)"/></g><circle cx="120" cy="74" r="15.2" fill="var(--c4,#fff3c4)"/><circle cx="120" cy="74" r="6.9" fill="#000" opacity=".12"/></g><path d="M84 196 L156 196 L140 290 L100 290 Z" fill="#efe1cf"/><path d="M84 196 L120 214 L156 196" fill="none" stroke="#d8c3a8" stroke-width="3"/><path d="M104 232 q16 10 32 0" fill="none" stroke="var(--c3)" stroke-width="6" stroke-linecap="round"/></svg></div><div class="prod-body"><h3>Quiet Ivory</h3><p>Whites and creams; lovely for sympathy or new babies.</p><div class="prod-row"><span class="price">from $65</span><button class="add" data-add="Quiet Ivory" aria-label="Add Quiet Ivory to basket">Add +</button></div></div></article></div>
+    </div>
+  </section>
+
+  <section class="s" id="delivery" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Delivery</p>
+      <h2 data-reveal="1">From our bench to their door.</h2>
+      <div class="deliv">
+        <div class="dv" data-reveal="0"><span>01</span><h3>Same-day</h3><p>Order before 1pm Tuesday to Saturday for local delivery that afternoon.</p></div>
+        <div class="dv" data-reveal="1"><span>02</span><h3>Any date you like</h3><p>Plan ahead for birthdays and anniversaries; choose the day at checkout.</p></div>
+        <div class="dv" data-reveal="2"><span>03</span><h3>Photo before it leaves</h3><p>We text you a photo of your bouquet before it goes out for delivery.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="delivery">
+  <section class="s" id="reviews" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Delivery</p><h2>Simple, reliable delivery</h2></div>
-      <div class="delivery">
-        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div><h3>Same-day</h3><p>Order before 1pm Tuesday to Saturday for local delivery the same afternoon.</p></article>
-        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Choose your date</h3><p>Plan ahead for birthdays and anniversaries. Pick any delivery date at checkout.</p></article>
-        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg></div><h3>Click &amp; collect</h3><p>Prefer to pick up? Collect from the shop at a time that suits you.</p></article>
+      <p class="eyebrow" data-reveal>Kind words</p>
+      <h2 data-reveal="1">Loved by people who <em>love</em> flowers.</h2>
+      <p class="sub" data-reveal="2"><span class="sample-tag">Sample reviews: placeholder text</span> &nbsp;A real site would pull these from the shop's Google reviews.</p>
+      <div class="revs">
+        <figure class="rev" data-reveal="0"><blockquote>Placeholder review. Ordered on my phone at lunch; Mum had flowers by four.</blockquote><footer><span>Sample reviewer</span><span class="stars">★★★★★</span></footer></figure>
+        <figure class="rev" data-reveal="1"><blockquote>Placeholder review. A couple describing their wedding flowers.</blockquote><footer><span>Sample reviewer</span><span class="stars">★★★★★</span></footer></figure>
+        <figure class="rev" data-reveal="2"><blockquote>Placeholder review. A regular who loves the florist's choice bouquet.</blockquote><footer><span>Sample reviewer</span><span class="stars">★★★★★</span></footer></figure>
       </div>
     </div>
   </section>
 
-  <section class="alt" id="reviews">
+  <section class="s" id="weddings" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Reviews</p><h2>Kind words</h2><p><span class="sample-tag">Sample reviews: placeholder text</span> On a real site these would be pulled in from the shop's Google reviews.</p></div>
-      <div class="cards">
-        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A customer who ordered on their phone at lunchtime and had flowers delivered to their mum that afternoon.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
-        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A couple describing how the shop handled their wedding flowers.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
-        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A regular who loves the seasonal "florist's choice" bouquet.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+      <div class="wed" data-reveal>
+        <div>
+          <p class="eyebrow" style="color:var(--gold)">Weddings &amp; events</p>
+          <h2>Your day, in <em>full bloom.</em></h2>
+          <p class="sub">Tell us your date and ideas. We'll come back with a mood board and a clear, fixed quote.</p>
+        </div>
+        <form data-demo>
+          <div class="row2"><div class="field"><label for="n">Names</label><input id="n" autocomplete="name"></div><div class="field"><label for="d">Wedding date</label><input id="d" type="date"></div></div>
+          <div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div>
+          <div class="field"><label for="m">Colours, venue, ideas…</label><textarea id="m"></textarea></div>
+          <button class="btn btn-gold" type="submit">Request a mood board</button>
+          <p role="status"></p>
+        </form>
       </div>
     </div>
   </section>
 
-  <section id="visit">
+  <section class="s" id="visit" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Visit the shop</p><h2>Opening hours &amp; location</h2></div>
+      <p class="eyebrow" data-reveal>Visit the shop</p>
+      <h2 data-reveal="1">Come and smell the roses.</h2>
       <div class="visit">
-        <div class="card">
-          <ul class="hours"><li><span>Tuesday – Friday</span><span>9:00 – 5:30</span></li><li><span>Saturday</span><span>8:30 – 4:00</span></li><li><span>Sunday – Monday</span><span>Closed</span></li><li><span>Online orders</span><span>24/7</span></li></ul>
-          <p class="address"><strong>Juniper &amp; Thistle Flowers</strong>7 Market Lane, Sampletown · Two doors from the bakery</p>
+        <div class="vcard" data-reveal="0">
+          <span data-hours="tue-fri 9-17:30; sat 8:30-16"><span data-hours-text>Open now</span></span>
+          <ul class="hours"><li><span>Tue – Fri</span><b>9:00 – 5:30</b></li><li><span>Saturday</span><b>8:30 – 4:00</b></li><li><span>Sun – Mon</span><b>Closed</b></li><li><span>Online shop</span><b>Always open</b></li></ul>
+          <p class="addr"><b>Juniper &amp; Thistle Flowers</b>7 Market Lane, Sampletown · two doors from the bakery</p>
         </div>
-        <div class="map" role="img" aria-label="Map placeholder showing the shop location"><a class="btn btn-ghost" href="#visit">Get directions</a><div class="map-pin"><span>Juniper &amp; Thistle</span><i></i></div><span class="map-label">Map placeholder · a live map goes here</span></div>
+        <div class="map" role="img" aria-label="Map placeholder" data-reveal="1"><span class="pin">Juniper &amp; Thistle</span><small>Map placeholder · live map goes here</small></div>
       </div>
-    </div>
-  </section>
-
-  <section class="alt" id="contact">
-    <div class="wrap contact">
-      <div>
-        <div class="sec-head"><p class="eyebrow">Weddings &amp; events</p><h2>Planning something special?</h2><p>Tell us your date and ideas, and we'll send back a few options and a clear quote.</p></div>
-        <div class="contact-points">
-          <a href="tel:+15550100789"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>(555) 010-0789</a>
-          <a href="mailto:hello@example.com"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>hello@example.com</a>
-        </div>
-      </div>
-      <form class="form">
-        <div class="row2"><div class="field"><label for="n">Name</label><input id="n" autocomplete="name"></div><div class="field"><label for="d">Event date</label><input id="d" type="date"></div></div>
-        <div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div>
-        <div class="field"><label for="m">Tell us about it</label><textarea id="m"></textarea></div>
-        <button class="btn btn-primary" type="submit">Request a quote</button>
-        <p class="form-msg" role="status"></p>
-      </form>
     </div>
   </section>
 </main>
 
-<footer class="site-foot"><div class="wrap"><span>© 2026 Juniper &amp; Thistle Flowers (fictional sample)</span><span>Sample redesign by <a href="../../">Aliyan Sami</a> · <a href="../">More examples</a></span></div></footer>
-<div class="mobile-bar"><a class="btn btn-ghost" href="tel:+15550100789">Call</a><a class="btn btn-primary" href="#shop">Shop flowers</a></div>
-<script src="../assets/demo.js" defer></script>
+<footer class="foot"><div class="wrap"><span>© 2026 Juniper &amp; Thistle Flowers (fictional sample)</span><span>Sample redesign by <a href="../../">Aliyan Sami</a> · <a href="../">More examples</a></span></div></footer>
+<div class="mbar"><a class="btn btn-forest" href="#build" style="background:#fff;color:var(--forest);box-shadow:inset 0 0 0 1.5px var(--forest)">Build one</a><a class="btn btn-forest" href="#shop">Shop flowers</a></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="../assets/flair.js" defer></script>
+<script>
+  const stage = document.getElementById("stage");
+  document.getElementById("palette").addEventListener("pick", (e) => stage.setAttribute("style", e.detail.dataset.pal));
+  document.getElementById("size").addEventListener("pick", (e) => {
+    stage.dataset.size = e.detail.dataset.size;
+    document.getElementById("total").textContent = "$" + e.detail.dataset.price;
+  });
+  const note = document.getElementById("note"), out = document.getElementById("note-out");
+  note.addEventListener("input", () => (out.textContent = note.value || "…"));
+</script>
 </body>
 </html>

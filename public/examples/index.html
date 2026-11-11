@@ -103,7 +103,7 @@
   .foot span { display: flex; gap: 18px; }
 
   /* Dialog with the before/after comparison */
-  dialog { width: min(1120px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 0; border-radius: 24px; background: var(--canvas); color: var(--ink); box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.5); overflow: auto; overscroll-behavior: contain; }
+  dialog { width: min(1120px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 0; border-radius: 24px; background: var(--canvas); color: var(--ink); box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.5); overflow: hidden auto; overscroll-behavior: contain; }
   dialog::backdrop { background: rgb(17 18 19 / 0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
   dialog[open] { animation: pop 0.32s cubic-bezier(0.2, 0, 0, 1); }
   @keyframes pop { from { opacity: 0; transform: translateY(16px) scale(0.98); } }
@@ -173,7 +173,7 @@
   <section class="intro">
     <p class="eyebrow">Examples · 03 before &amp; after makeovers</p>
     <h1><span class="hl">Sample redesigns</span> <span class="quiet">for clinics and local shops.</span></h1>
-    <p class="lead">Here's the kind of upgrade I make for small businesses with an outdated website: the same business, before and after. Open a card to compare them on desktop and phone, or try the live redesign yourself.</p>
+    <p class="lead">Most small-business websites look like the same template. Here's what happens when one gets a site people actually remember: the same business, before and after. Open a card to compare them on desktop and phone, or try the live redesign yourself.</p>
     <p class="notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Concept work for illustration: sample businesses, not real clients.</p>
   </section>
 
@@ -182,19 +182,19 @@
       <span class="card-arrow" aria-hidden="true">&#8599;</span>
       <span class="card-top"><span>01</span><span>Dental practice</span></span>
       <span class="card-frame"><img class="after" src="img/dental-after.webp" alt="Redesigned homepage for the sample dental practice" width="1280" height="800"><span class="tag">After</span><span class="before"><img src="img/dental-before.webp" alt="" width="1280" height="800" loading="lazy"><span class="tag">Before</span></span></span>
-      <span class="card-foot"><span class="card-title">Harbourline Family Dental</span><span class="card-kind">Online booking, treatments, hours and map</span></span>
+      <span class="card-foot"><span class="card-title">Harbourline Family Dental</span><span class="card-kind">Dark, bold look with a glass booking card</span></span>
     </button>
     <button class="card" style="--bg:#ffd43b;--fg:#1a1600" data-open="vet" aria-haspopup="dialog">
       <span class="card-arrow" aria-hidden="true">&#8599;</span>
       <span class="card-top"><span>02</span><span>Vet clinic</span></span>
       <span class="card-frame"><img class="after" src="img/vet-after.webp" alt="Redesigned homepage for the sample vet clinic" width="1280" height="800"><span class="tag">After</span><span class="before"><img src="img/vet-before.webp" alt="" width="1280" height="800" loading="lazy"><span class="tag">Before</span></span></span>
-      <span class="card-foot"><span class="card-title">Kestrel Vale Veterinary Clinic</span><span class="card-kind">Book-a-visit flow, services and emergency info</span></span>
+      <span class="card-foot"><span class="card-title">Kestrel Vale Veterinary Clinic</span><span class="card-kind">Playful illustrations and a pet picker</span></span>
     </button>
     <button class="card" style="--bg:#7c5cff;--fg:#ffffff" data-open="florist" aria-haspopup="dialog">
       <span class="card-arrow" aria-hidden="true">&#8599;</span>
       <span class="card-top"><span>03</span><span>Florist</span></span>
       <span class="card-frame"><img class="after" src="img/florist-after.webp" alt="Redesigned homepage for the sample florist" width="1280" height="800"><span class="tag">After</span><span class="before"><img src="img/florist-before.webp" alt="" width="1280" height="800" loading="lazy"><span class="tag">Before</span></span></span>
-      <span class="card-foot"><span class="card-title">Juniper &amp; Thistle Flowers</span><span class="card-kind">Online shop, same-day delivery and wedding enquiries</span></span>
+      <span class="card-foot"><span class="card-title">Juniper &amp; Thistle Flowers</span><span class="card-kind">Build-a-bouquet and live delivery countdown</span></span>
     </button>
   </section>
 
@@ -240,11 +240,11 @@
           <span class="tag l">Before</span><span class="tag r">After</span><span class="handle"></span>
           <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
         </div>
-        <p class="hint">Drag the slider to compare the old homepage with the redesign.</p>
+        <p class="hint">Drag the slider to compare a typical template site with the redesign.</p>
       </div>
       <div class="view phones" data-for="phone" hidden>
-        <figure><img class="pb" alt="" width="780" height="1688"><figcaption>Before: zoomed-out desktop page</figcaption></figure>
-        <figure><img class="pa" alt="" width="780" height="1688"><figcaption>After: built for phones</figcaption></figure>
+        <figure><img class="pb" alt="" width="780" height="1688"><figcaption>Before</figcaption></figure>
+        <figure><img class="pa" alt="" width="780" height="1688"><figcaption>After</figcaption></figure>
       </div>
       <div class="d-info">
         <div><h3>Before</h3><ul class="ticks bad" data-list="before"></ul></div>
@@ -264,18 +264,18 @@
   const projects = {
     dental: {
       title: "Harbourline Family Dental", sub: "Sample dental practice · concept work",
-      before: ["Fixed-width table layout that phones shrink to unreadable size", "Booking only by phone during office hours", "Tiny text, scrolling banner and a 2011 copyright", "No clear next step; services hidden in a table"],
-      after: ["Mobile-first layout with a sticky Call / Book bar", "Online booking widget right in the hero", "Clear treatments with upfront starting prices", "Fast, secure HTTPS page with hours, map and contact form", "Space for real Google reviews (placeholders here)"],
+      before: ["Clean but generic template that looks like thousands of others", "Nothing that says why to choose this practice", "Flat, static layout with little visual hierarchy", "Emergency care and first-visit info easy to miss"],
+      after: ["Bold, memorable look with an animated hero", "Booking card front and centre, plus a live \"Open now\" status", "Grid of treatments that puts emergency care first", "\"Your first visit\" steps to reassure nervous patients", "Mobile-first and fast, with a sticky Call / Book bar"],
     },
     vet: {
       title: "Kestrel Vale Veterinary Clinic", sub: "Sample vet clinic · concept work",
-      before: ["Not mobile-friendly: pinch and zoom to read anything", "\"Please phone the clinic\" is the only way to book", "Guestbook, hit counter and 'best viewed in Netscape'", "Emergency information buried in a scrolling banner"],
-      after: ["Book-a-visit flow that works 24/7 on any phone", "Prominent emergency call-out with one-tap calling", "Plain-English services with starting prices", "Fast, secure HTTPS page with hours, map and contact form", "Space for real Google reviews (placeholders here)"],
+      before: ["Tidy but forgettable template feel", "No personality: nothing says \"we love animals\"", "One flat list of services for every pet", "Emergency info tucked into a small box"],
+      after: ["Playful illustrated hero with friendly animation", "\"Who's coming in?\" pet picker that starts the booking", "Care tabs for puppy & kitten, adult and senior pets", "Big emergency banner with one-tap calling", "Booking form, live opening status and a sticky phone bar"],
     },
     florist: {
       title: "Juniper & Thistle Flowers", sub: "Sample florist · concept work",
-      before: ["Orders by phone, or emailing card details (unsafe)", "Price list in a table with item codes", "Desktop-only layout, Flash badge, 2012 copyright", "No delivery cut-off or clear way to buy"],
-      after: ["Online shop with secure checkout and size picker", "Same-day delivery cut-off shown up front", "Bouquet cards with an 'Add' button on each", "Wedding and event enquiry form", "Fast, secure HTTPS and a sticky Shop button on phones"],
+      before: ["Pleasant but plain shop template", "Bouquets shown as simple cards with no story", "No way to personalise an order", "Same-day cut-off is just a line of text"],
+      after: ["Editorial, high-end look with a bouquet that blooms in", "Build-a-bouquet: pick colours and size, watch it change live", "Live countdown to the same-day delivery cut-off", "Swipeable shop rail with add-to-basket", "Wedding mood-board enquiry form"],
     },
   };
 
