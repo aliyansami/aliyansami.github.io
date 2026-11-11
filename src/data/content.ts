@@ -6,6 +6,8 @@ export const profile = {
   email: "itsaliyansami@gmail.com",
   github: "https://github.com/aliyansami",
   linkedin: "https://www.linkedin.com/in/aliyan-sami-748364215/",
+  /** Google Calendar booking page for a free 15-minute call */
+  booking: "https://calendar.app.google/LyUKF3PyTGqqkJb59",
   photo: "aliyan.jpg",
   intro:
     "I build websites, online stores and AI features for businesses in Australia, the UK, Europe and the US, and the reliable backend systems behind them.",

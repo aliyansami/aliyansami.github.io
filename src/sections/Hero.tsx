@@ -2,6 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import DotField from "../components/DotField";
 import { spring } from "../components/motion";
+import BookCall from "../components/BookCall";
 import { profile } from "../data/content";
 
 export function LocalTime() {
@@ -130,10 +131,14 @@ export default function Hero() {
           <a className="btn btn-ink" href="#work">
             See selected work <span aria-hidden="true">↓</span>
           </a>
-          <a className="btn btn-line" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
-            Get a free mock-up
-          </a>
+          <BookCall />
         </motion.div>
+        <motion.p className="hero-alt" {...rise(0.8)}>
+          or{" "}
+          <a className="arrow-link" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
+            ask for a free homepage mock-up <span aria-hidden="true">→</span>
+          </a>
+        </motion.p>
       </motion.div>
       <motion.a className="scroll-cue" href="#about" aria-label="Scroll to about" {...rise(1.1)}>
         <span>Scroll</span>

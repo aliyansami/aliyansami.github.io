@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { profile } from "../data/content";
 import { ease, spring } from "./motion";
+import BookCall from "./BookCall";
 
 export const sections = [
   { id: "about", label: "About" },
@@ -83,8 +84,8 @@ export default function Nav() {
             <span className="long">Sample redesigns</span>
             <span className="short">Examples</span>
           </a>
-          <a className="nav-cta" href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>
-            <span className="dot" aria-hidden="true" /> Available
+          <a className="nav-cta book-call" href={profile.booking} target="_blank" rel="noreferrer">
+            <span className="dot" aria-hidden="true" /> Book a call
           </a>
           <button
             type="button"
@@ -133,6 +134,7 @@ export default function Nav() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.45 }}
             >
+              <BookCall className="btn btn-accent sheet-book" label="Book a free 15-min call" />
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <span>
                 <a href={profile.linkedin} target="_blank" rel="noreferrer">

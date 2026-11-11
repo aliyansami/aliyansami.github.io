@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal, RevealText, SectionLabel } from "../components/motion";
 import { profile } from "../data/content";
 import { LocalTime } from "./Hero";
+import BookCall from "../components/BookCall";
 
 export default function Connect() {
   const [copied, setCopied] = useState(false);
@@ -30,7 +31,16 @@ export default function Connect() {
         mock-up offer and a fixed quote. No pressure, no obligation.
       </Reveal>
 
-      <Reveal className="connect-mail" delay={0.2}>
+      <Reveal className="connect-book" delay={0.2}>
+        <BookCall className="btn btn-accent btn-lg" label="Book a free 15-minute call" />
+        <span>Pick a time that suits you on my calendar. Video call, no obligation.</span>
+      </Reveal>
+
+      <Reveal as="p" className="connect-or" delay={0.25}>
+        or email me
+      </Reveal>
+
+      <Reveal className="connect-mail" delay={0.25}>
         <a href={`mailto:${profile.email}?subject=Free%20mock-up%20request`}>{profile.email}</a>
         <button type="button" onClick={copy} aria-live="polite">
           <AnimatePresence mode="wait" initial={false}>

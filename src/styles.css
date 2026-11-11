@@ -1630,6 +1630,84 @@ ol {
   gap: 20px;
 }
 
+/* Book a call: the accent button used in the hero, menu and contact section */
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 12px 26px -14px var(--accent);
+}
+
+.btn-accent:hover {
+  box-shadow: 0 16px 30px -14px var(--accent);
+}
+
+.btn-lg {
+  min-height: 60px;
+  padding: 0 30px;
+  font-size: 17px;
+}
+
+.cal-icon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  transition: transform 0.35s var(--ease);
+}
+
+.cal-tick {
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+  transition: stroke-dashoffset 0.4s var(--ease) 0.05s;
+}
+
+.book-call:hover .cal-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.book-call:hover .cal-tick {
+  stroke-dashoffset: 0;
+}
+
+.hero-alt {
+  margin-top: 18px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.hero-alt .arrow-link {
+  color: var(--ink);
+}
+
+.connect-book {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.connect-book span {
+  max-width: 22em;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.connect-or {
+  margin-top: clamp(36px, 4vw, 52px);
+  font: 500 12.5px var(--mono);
+  color: var(--muted);
+}
+
+.connect-or + .connect-mail {
+  margin-top: 10px;
+}
+
+.sheet-book {
+  justify-self: start;
+  margin-bottom: 10px;
+}
+
 /* Tablet */
 
 @media (max-width: 1100px) {
@@ -1724,6 +1802,10 @@ ol {
   .hero-meta {
     font-size: 12px;
     gap: 6px;
+  }
+
+  .connect-book .btn {
+    width: 100%;
   }
 
   .hero-meta .meta-place {
