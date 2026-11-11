@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juniper &amp; Thistle Flowers (sample redesign)</title>
+<meta name="description" content="Sample homepage redesign for a fictional independent florist, by Aliyan Sami.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7a2f4f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/after.css">
+<style>
+  :root { --brand: #7a2f4f; --brand-soft: #f6e4ea; --accent: #e88aa6; --bg: #fdf8f4; --surface: #ffffff; --ink: #2a1a20; --ink-2: #6a5860; --line: #efe2dc; --radius: 20px; --display: "Fraunces", Georgia, serif; --body: "DM Sans", system-ui, sans-serif; }
+  h1, h2, h3, .logo { font-weight: 600; letter-spacing: -0.015em; }
+  .hero { background: radial-gradient(900px 520px at 88% 10%, #f9dfe7 0, transparent 60%), radial-gradient(600px 400px at 0% 100%, #eaf1e3 0, transparent 60%); }
+  .hero h1 em { font-style: italic; }
+  .hero-art { position: relative; }
+  .hero-art .bq { display: none; position: absolute; width: 190px; right: -20px; top: -150px; filter: drop-shadow(0 18px 20px rgb(122 47 79 / 0.18)); }
+  .size { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .size .slot b { display: block; font-size: 12px; font-weight: 500; color: inherit; opacity: 0.75; margin-top: 4px; }
+  .card-icon { background: #edf3e6; color: #4f7a52; }
+  .product-art.p1 { background: #fbe7ee; } .product-art.p2 { background: #f6f1ec; } .product-art.p3 { background: #fbe9e4; } .product-art.p4 { background: #efeaf9; }
+  .product h3 { font-size: 20px; }
+  .product .price { margin: 0; padding: 0; }
+  .delivery { display: grid; gap: 14px; }
+  @media (min-width: 640px) { .delivery { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 960px) { .hero-art .bq { display: block; } }
+</style>
+</head>
+<body>
+<div class="demo-bar">Sample redesign of a fictional shop by Aliyan Sami. Not a real business. <a href="../">See all examples</a> · <a href="before.html">See the "before"</a></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></span>Juniper &amp; Thistle</a>
+    <nav class="nav" aria-label="Main"><a href="#shop">Shop</a><a href="#delivery">Delivery</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a></nav>
+    <a class="btn btn-ghost head-call" href="#contact">Weddings &amp; events</a>
+    <a class="btn btn-primary" href="#shop">Shop flowers</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Independent florist · Same-day local delivery</p>
+        <h1>Seasonal flowers, <em>hand-tied</em> and delivered today.</h1>
+        <p class="hero-lead">Fresh bouquets for birthdays, thank-yous and just-because. Order online in two minutes; order by 1pm for same-day delivery.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#shop">Shop bouquets</a>
+          <a class="btn btn-ghost" href="#contact">Wedding flowers</a>
+        </div>
+        <ul class="hero-facts"><li>Order by 1pm, delivered today</li><li>Secure checkout</li><li>Handwritten card included</li></ul>
+      </div>
+
+      <div class="hero-art">
+        <div class="bq"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#e88aa6"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#c9577a"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#e88aa6"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div>
+        <div class="widget" id="order" aria-label="Quick order (demo)">
+          <div class="widget-head"><h2>Florist's choice</h2></div>
+          <div class="size" data-pick><button class="slot" aria-pressed="false">Classic<b>$45</b></button><button class="slot on" aria-pressed="true">Generous<b>$65</b></button><button class="slot" aria-pressed="false">Luxe<b>$90</b></button></div>
+          <div class="chips" data-pick><button class="chip on" aria-pressed="true">Today</button><button class="chip" aria-pressed="false">Tomorrow</button><button class="chip" aria-pressed="false">Pick a date</button></div>
+          <a class="btn btn-primary" href="#shop">Add to basket · $65</a>
+          <p class="widget-note">Demo shop: would use Shopify or Stripe checkout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="shop">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Shop</p><h2>This week's bouquets</h2><p>Made fresh each morning from what's best at the market, so every bouquet is a little different.</p></div>
+      <div class="cards four">
+        <article class="card product"><div class="product-art p1"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#e88aa6"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#c9577a"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f4b183"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#e88aa6"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>The Juniper</h3><p>Garden roses, sweet peas and soft greenery.</p><div class="product-row"><p class="price">from $55</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
+        <article class="card product"><div class="product-art p2"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#f6d6e0"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#ffffff"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#e9a3b8"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#ffffff"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#f6d6e0"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Blush &amp; Ivory</h3><p>Soft whites and pinks; lovely for new babies and thank-yous.</p><div class="product-row"><p class="price">from $60</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
+        <article class="card product"><div class="product-art p3"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#c64b4b"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#e07a5f"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#a8323e"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#e07a5f"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#c64b4b"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Red Thistle</h3><p>Deep reds and coral for anniversaries and romance.</p><div class="product-row"><p class="price">from $70</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
+        <article class="card product"><div class="product-art p4"><svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#4f7a52" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 L70 90"/><path d="M100 190 L100 70"/><path d="M100 190 L132 92"/><path d="M100 190 L52 120"/><path d="M100 190 L150 124"/></g><g fill="#6f9a6a"><ellipse cx="62" cy="140" rx="16" ry="7" transform="rotate(-35 62 140)"/><ellipse cx="140" cy="142" rx="16" ry="7" transform="rotate(35 140 142)"/></g><g fill="#b9a7e8"><circle cx="70" cy="70" r="18"/><circle cx="88" cy="82" r="18"/><circle cx="80" cy="106" r="18"/><circle cx="60" cy="106" r="18"/><circle cx="52" cy="82" r="18"/></g><circle cx="70" cy="88" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f2c14e"><circle cx="132" cy="76" r="16"/><circle cx="148" cy="87" r="16"/><circle cx="141" cy="108" r="16"/><circle cx="123" cy="108" r="16"/><circle cx="116" cy="87" r="16"/></g><circle cx="132" cy="92" r="8" fill="#fff6d6" opacity=".9"/><g fill="#8e7cc3"><circle cx="100" cy="45" r="19"/><circle cx="119" cy="58" r="19"/><circle cx="111" cy="83" r="19"/><circle cx="89" cy="83" r="19"/><circle cx="81" cy="58" r="19"/></g><circle cx="100" cy="64" r="9" fill="#fff6d6" opacity=".9"/><g fill="#f2c14e"><circle cx="52" cy="107" r="13"/><circle cx="65" cy="116" r="13"/><circle cx="59" cy="133" r="13"/><circle cx="45" cy="133" r="13"/><circle cx="39" cy="116" r="13"/></g><circle cx="52" cy="120" r="6" fill="#fff6d6" opacity=".9"/><g fill="#b9a7e8"><circle cx="150" cy="109" r="13"/><circle cx="163" cy="118" r="13"/><circle cx="157" cy="135" r="13"/><circle cx="143" cy="135" r="13"/><circle cx="137" cy="118" r="13"/></g><circle cx="150" cy="122" r="6" fill="#fff6d6" opacity=".9"/><path d="M76 150 L124 150 L112 196 L88 196 Z" fill="#e9d8c4"/><path d="M84 160 h32" stroke="#c9a88a" stroke-width="3"/></svg></div><div class="product-body"><h3>Meadow Lilac</h3><p>Lilac, lavender and a pop of yellow. Bright and cheerful.</p><div class="product-row"><p class="price">from $50</p><a class="btn btn-primary" href="#order">Add</a></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="delivery">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Delivery</p><h2>Simple, reliable delivery</h2></div>
+      <div class="delivery">
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div><h3>Same-day</h3><p>Order before 1pm Tuesday to Saturday for local delivery the same afternoon.</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Choose your date</h3><p>Plan ahead for birthdays and anniversaries. Pick any delivery date at checkout.</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg></div><h3>Click &amp; collect</h3><p>Prefer to pick up? Collect from the shop at a time that suits you.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="reviews">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Reviews</p><h2>Kind words</h2><p><span class="sample-tag">Sample reviews: placeholder text</span> On a real site these would be pulled in from the shop's Google reviews.</p></div>
+      <div class="cards">
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A customer who ordered on their phone at lunchtime and had flowers delivered to their mum that afternoon.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A couple describing how the shop handled their wedding flowers.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A regular who loves the seasonal "florist's choice" bouquet.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Visit the shop</p><h2>Opening hours &amp; location</h2></div>
+      <div class="visit">
+        <div class="card">
+          <ul class="hours"><li><span>Tuesday – Friday</span><span>9:00 – 5:30</span></li><li><span>Saturday</span><span>8:30 – 4:00</span></li><li><span>Sunday – Monday</span><span>Closed</span></li><li><span>Online orders</span><span>24/7</span></li></ul>
+          <p class="address"><strong>Juniper &amp; Thistle Flowers</strong>7 Market Lane, Sampletown · Two doors from the bakery</p>
+        </div>
+        <div class="map" role="img" aria-label="Map placeholder showing the shop location"><a class="btn btn-ghost" href="#visit">Get directions</a><div class="map-pin"><span>Juniper &amp; Thistle</span><i></i></div><span class="map-label">Map placeholder · a live map goes here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="sec-head"><p class="eyebrow">Weddings &amp; events</p><h2>Planning something special?</h2><p>Tell us your date and ideas, and we'll send back a few options and a clear quote.</p></div>
+        <div class="contact-points">
+          <a href="tel:+15550100789"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>(555) 010-0789</a>
+          <a href="mailto:hello@example.com"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>hello@example.com</a>
+        </div>
+      </div>
+      <form class="form">
+        <div class="row2"><div class="field"><label for="n">Name</label><input id="n" autocomplete="name"></div><div class="field"><label for="d">Event date</label><input id="d" type="date"></div></div>
+        <div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div>
+        <div class="field"><label for="m">Tell us about it</label><textarea id="m"></textarea></div>
+        <button class="btn btn-primary" type="submit">Request a quote</button>
+        <p class="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot"><div class="wrap"><span>© 2026 Juniper &amp; Thistle Flowers (fictional sample)</span><span>Sample redesign by <a href="../../">Aliyan Sami</a> · <a href="../">More examples</a></span></div></footer>
+<div class="mobile-bar"><a class="btn btn-ghost" href="tel:+15550100789">Call</a><a class="btn btn-primary" href="#shop">Shop flowers</a></div>
+<script src="../assets/demo.js" defer></script>
+</body>
+</html>

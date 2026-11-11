@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbourline Family Dental (sample redesign)</title>
+<meta name="description" content="Sample homepage redesign for a fictional family dental practice, by Aliyan Sami.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f6e6a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/after.css">
+<style>
+  :root { --brand: #0f6e6a; --brand-soft: #dff1ee; --accent: #ff8a5b; --bg: #f8faf9; --ink: #0f1f1e; --ink-2: #4a5958; --line: #e1e8e6; --display: "Manrope", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif; }
+  .hero { background: radial-gradient(1200px 500px at 85% -10%, #d9f0eb 0, transparent 60%), radial-gradient(700px 400px at -10% 110%, #fff0e8 0, transparent 60%); }
+  .hero h1 { font-weight: 800; }
+</style>
+</head>
+<body>
+<div class="demo-bar">Sample redesign of a fictional practice by Aliyan Sami. Not a real business. <a href="../">See all examples</a> · <a href="before.html">See the "before"</a></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c-2.5 0-4 2-4 4.5 0 3 1.2 4.6 2 7.5.7 2.6 1 6 2.6 6 1.8 0 1.6-5 4.4-5s2.6 5 4.4 5c1.6 0 1.9-3.4 2.6-6 .8-2.9 2-4.5 2-7.5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg></span>Harbourline Dental</a>
+    <nav class="nav" aria-label="Main"><a href="#services">Treatments</a><a href="#reviews">Reviews</a><a href="#visit">Visit us</a><a href="#contact">Contact</a></nav>
+    <a class="btn btn-ghost head-call" href="tel:+15550100123">(555) 010-0123</a>
+    <a class="btn btn-primary" href="#book">Book online</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Family dentist · New patients welcome</p>
+        <h1>Gentle dental care for the <em>whole family.</em></h1>
+        <p class="hero-lead">Check-ups, cleans, fillings and whitening in a calm, modern practice. Pick a time that suits you and book in under a minute, day or night.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#book">Book an appointment</a>
+          <a class="btn btn-ghost" href="tel:+15550100123"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call the practice</a>
+        </div>
+        <ul class="hero-facts"><li>Same-week appointments</li><li>Most insurance plans</li><li>Emergency slots daily</li></ul>
+      </div>
+
+      <div class="widget" id="book" aria-label="Online booking (demo)">
+        <div class="widget-head"><h2>Book online</h2><span>Takes about 60 seconds</span></div>
+        <div class="chips" data-pick><button class="chip on" aria-pressed="true">Check-up &amp; clean</button><button class="chip" aria-pressed="false">Toothache</button><button class="chip" aria-pressed="false">Whitening</button><button class="chip" aria-pressed="false">Child visit</button></div>
+        <div class="days" data-pick><button class="day" aria-pressed="false">Mon<b>14</b></button><button class="day on" aria-pressed="true">Tue<b>15</b></button><button class="day" aria-pressed="false">Wed<b>16</b></button><button class="day" aria-pressed="false">Thu<b>17</b></button><button class="day" aria-pressed="false">Fri<b>18</b></button></div>
+        <div class="slots" data-pick><button class="slot off" aria-disabled="true">8:30</button><button class="slot" aria-pressed="false">9:15</button><button class="slot on" aria-pressed="true">10:00</button><button class="slot" aria-pressed="false">11:45</button><button class="slot off" aria-disabled="true">1:30</button><button class="slot" aria-pressed="false">3:15</button></div>
+        <a class="btn btn-primary" href="#contact">Confirm Tue 15, 10:00</a>
+        <p class="widget-note">Demo booking widget: would connect to the practice's existing system.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="services">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Treatments</p><h2>Everything your family's smile needs</h2><p>Clear, upfront information on every treatment, so you know what to expect before you sit in the chair.</p></div>
+      <div class="cards">
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Check-ups &amp; cleans</h3><p>A thorough exam, scale and polish, with X-rays when needed. Recommended every six months.</p><p class="price">From $95</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Emergency dentist</h3><p>Toothache, chipped tooth or lost filling? We keep slots free every day for urgent visits.</p><p class="price">Same-day slots</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-5 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div><h3>Teeth whitening</h3><p>Professional in-chair or take-home whitening for a brighter smile that lasts.</p><p class="price">From $350</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><h3>Children's dentistry</h3><p>Friendly, patient care that helps kids feel at home at the dentist from their first visit.</p><p class="price">Kids' plans available</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M12 4v16"/></svg></div><h3>Fillings &amp; crowns</h3><p>Natural, tooth-coloured fillings and crowns that blend in with your smile.</p><p class="price">Priced after exam</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></div><h3>Payment plans</h3><p>Spread the cost of bigger treatments with simple monthly payments. Most insurance accepted.</p><p class="price">Ask us how</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Reviews</p><h2>What patients say</h2><p><span class="sample-tag">Sample reviews: placeholder text</span> On a real site these would be pulled in from the practice's Google reviews.</p></div>
+      <div class="cards">
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A short quote from a patient about how easy it was to book online and how gentle the check-up felt.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A parent describing their child's first visit and how the team made it fun instead of scary.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. Someone who needed an emergency appointment and was seen the same day.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="visit">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Visit us</p><h2>Opening hours &amp; location</h2></div>
+      <div class="visit">
+        <div class="card">
+          <ul class="hours"><li><span>Monday – Thursday</span><span>8:30 – 5:30</span></li><li><span>Friday</span><span>8:30 – 3:00</span></li><li><span>Saturday</span><span>9:00 – 1:00</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
+          <p class="address"><strong>Harbourline Family Dental</strong>12 Harbour Road, Sampletown · Free parking at the rear</p>
+        </div>
+        <div class="map" role="img" aria-label="Map placeholder showing the practice location"><a class="btn btn-ghost" href="#visit">Get directions</a><div class="map-pin"><span>Harbourline Dental</span><i></i></div><span class="map-label">Map placeholder · a live map goes here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="sec-head"><p class="eyebrow">Contact</p><h2>Questions? We're happy to help.</h2><p>Send us a message and the team will get back to you within one working day.</p></div>
+        <div class="contact-points">
+          <a href="tel:+15550100123"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>(555) 010-0123</a>
+          <a href="mailto:hello@example.com"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>hello@example.com</a>
+        </div>
+      </div>
+      <form class="form">
+        <div class="row2"><div class="field"><label for="n">Name</label><input id="n" autocomplete="name"></div><div class="field"><label for="p">Phone</label><input id="p" type="tel" autocomplete="tel"></div></div>
+        <div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div>
+        <div class="field"><label for="m">How can we help?</label><textarea id="m"></textarea></div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot"><div class="wrap"><span>© 2026 Harbourline Family Dental (fictional sample)</span><span>Sample redesign by <a href="../../">Aliyan Sami</a> · <a href="../">More examples</a></span></div></footer>
+<div class="mobile-bar"><a class="btn btn-ghost" href="tel:+15550100123">Call</a><a class="btn btn-primary" href="#book">Book online</a></div>
+<script src="../assets/demo.js" defer></script>
+</body>
+</html>

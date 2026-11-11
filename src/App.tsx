@@ -160,6 +160,9 @@ export default function App() {
             {profile.email}
           </a>
           <span className="foot-links">
+            <a className="link" href="examples/">
+              Sample redesigns
+            </a>
             <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>

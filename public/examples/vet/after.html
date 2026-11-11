@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Vale Veterinary Clinic (sample redesign)</title>
+<meta name="description" content="Sample homepage redesign for a fictional veterinary clinic, by Aliyan Sami.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f3a5f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/after.css">
+<style>
+  :root { --brand: #1f3a5f; --brand-soft: #e4ecf6; --accent: #f2a23a; --bg: #fffaf3; --surface: #ffffff; --ink: #172235; --ink-2: #4f5a6b; --line: #ece4d8; --radius: 22px; --display: "Nunito", system-ui, sans-serif; --body: "Nunito", system-ui, sans-serif; }
+  .hero { background: radial-gradient(900px 480px at 90% 0%, #ffe9c7 0, transparent 60%); }
+  .hero h1 { font-weight: 900; }
+  .hero h1 em { color: #d9821c; }
+  .card-icon { background: #fff1db; color: #b8650b; }
+  .emergency { background: var(--brand); color: #fff; border-radius: 22px; padding: 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+  .emergency h3 { font-size: 21px; }
+  .emergency p { color: #cfdbec; font-size: 15px; margin-top: 4px; }
+  .emergency .btn { background: var(--accent); color: #2a1700; }
+  .pet { display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 16px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 16px; }
+  .pet i { width: 44px; height: 44px; border-radius: 50%; background: #fff1db; color: #b8650b; display: grid; place-items: center; flex: none; }
+  .pet i svg { width: 22px; height: 22px; }
+  .pet b { display: block; font-size: 15px; }
+  .pet span { font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="demo-bar">Sample redesign of a fictional clinic by Aliyan Sami. Not a real business. <a href="../">See all examples</a> · <a href="before.html">See the "before"</a></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/><path d="M12 11c-3 0-6 4.5-6 7 0 1.7 1.3 2.5 3 2.5 1.3 0 2-.6 3-.6s1.7.6 3 .6c1.7 0 3-.8 3-2.5 0-2.5-3-7-6-7z"/></svg></span>Kestrel Vale Vets</a>
+    <nav class="nav" aria-label="Main"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#visit">Hours</a><a href="#contact">Contact</a></nav>
+    <a class="btn btn-ghost head-call" href="tel:+15550100456">(555) 010-0456</a>
+    <a class="btn btn-primary" href="#book">Book a visit</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Small animal vets · Dogs, cats &amp; rabbits</p>
+        <h1>Kind, unhurried care for the pets <em>you love.</em></h1>
+        <p class="hero-lead">Vaccinations, check-ups, dental care and surgery from a friendly local team. Book online in a minute, without waiting on hold.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#book">Book an appointment</a>
+          <a class="btn btn-ghost" href="tel:+15550100456"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call the clinic</a>
+        </div>
+        <ul class="hero-facts"><li>Online booking 24/7</li><li>Vaccination reminders by text</li><li>Fear-free handling</li></ul>
+      </div>
+
+      <div class="widget" id="book" aria-label="Online booking (demo)">
+        <div class="widget-head"><h2>Book a visit</h2><span>Mon – Sat</span></div>
+        <div class="pet"><i><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/><path d="M12 11c-3 0-6 4.5-6 7 0 1.7 1.3 2.5 3 2.5 1.3 0 2-.6 3-.6s1.7.6 3 .6c1.7 0 3-.8 3-2.5 0-2.5-3-7-6-7z"/></svg></i><div><b>Who's coming in?</b><span>Add your pet's name and species at the next step</span></div></div>
+        <div class="chips" data-pick><button class="chip on" aria-pressed="true">Vaccination</button><button class="chip" aria-pressed="false">Check-up</button><button class="chip" aria-pressed="false">Unwell pet</button><button class="chip" aria-pressed="false">Dental</button></div>
+        <div class="days" data-pick><button class="day" aria-pressed="false">Mon<b>14</b></button><button class="day" aria-pressed="false">Tue<b>15</b></button><button class="day on" aria-pressed="true">Wed<b>16</b></button><button class="day" aria-pressed="false">Thu<b>17</b></button><button class="day" aria-pressed="false">Fri<b>18</b></button></div>
+        <div class="slots" data-pick><button class="slot" aria-pressed="false">8:45</button><button class="slot off" aria-disabled="true">9:30</button><button class="slot" aria-pressed="false">11:00</button><button class="slot on" aria-pressed="true">2:15</button><button class="slot" aria-pressed="false">4:00</button><button class="slot off" aria-disabled="true">5:15</button></div>
+        <a class="btn btn-primary" href="#contact">Confirm Wed 16, 2:15</a>
+        <p class="widget-note">Demo booking widget: would connect to the clinic's practice software.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="services">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Services</p><h2>Everything your pet needs, under one roof</h2><p>From puppy and kitten first visits to senior care, explained in plain English.</p></div>
+      <div class="cards">
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M17 7l-9.5 9.5L4 20l3.5-3.5M14 4l6 6M9 9l6 6"/></svg></div><h3>Vaccinations</h3><p>Puppy, kitten and annual booster vaccinations, with a text reminder when the next one is due.</p><p class="price">From $65</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div><h3>Health check-ups</h3><p>Nose-to-tail exams, weight and diet advice, and early checks for common problems.</p><p class="price">From $70</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M19.1 19.1l-4.2-4.2M2 12h6M22 12h-6"/></svg></div><h3>Surgery &amp; desexing</h3><p>Routine and soft-tissue surgery with careful pain relief and a same-day update call.</p><p class="price">Quote after consult</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c-2.5 0-4 2-4 4.5 0 3 1.2 4.6 2 7.5.7 2.6 1 6 2.6 6 1.8 0 1.6-5 4.4-5s2.6 5 4.4 5c1.6 0 1.9-3.4 2.6-6 .8-2.9 2-4.5 2-7.5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg></div><h3>Pet dental care</h3><p>Dental checks, scale and polish, and extractions when needed, for fresher breath and less pain.</p><p class="price">From $180</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>Microchipping</h3><p>Quick microchipping and registration so a lost pet finds its way home.</p><p class="price">From $45</p></article>
+        <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div><h3>Puppy &amp; kitten packs</h3><p>First vaccinations, worming, flea treatment and a settling-in chat, bundled at one price.</p><p class="price">From $149</p></article>
+      </div>
+      <div class="emergency" style="margin-top:18px"><div><h3>Pet emergency?</h3><p>Call us first during opening hours. Out of hours, our phone line gives you the nearest emergency vet.</p></div><a class="btn" href="tel:+15550100456">Call (555) 010-0456</a></div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Reviews</p><h2>Loved by local pet owners</h2><p><span class="sample-tag">Sample reviews: placeholder text</span> On a real site these would be pulled in from the clinic's Google reviews.</p></div>
+      <div class="cards">
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. An owner explaining how calm their nervous dog was during the visit and how clearly the vet explained everything.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. Someone who booked a vaccination online at night and liked getting a reminder text.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+        <article class="card review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Placeholder review text. A cat owner thanking the team for the follow-up call after surgery.</blockquote><footer>Sample reviewer · Placeholder</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="visit">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Visit us</p><h2>Opening hours &amp; location</h2></div>
+      <div class="visit">
+        <div class="card">
+          <ul class="hours"><li><span>Monday – Friday</span><span>8:00 – 6:30</span></li><li><span>Saturday</span><span>9:00 – 1:00</span></li><li><span>Sunday</span><span>Closed</span></li><li><span>Emergencies</span><span>Call first</span></li></ul>
+          <p class="address"><strong>Kestrel Vale Veterinary Clinic</strong>48 Vale Road, Sampletown · Opposite the park, easy parking</p>
+        </div>
+        <div class="map" role="img" aria-label="Map placeholder showing the clinic location"><a class="btn btn-ghost" href="#visit">Get directions</a><div class="map-pin"><span>Kestrel Vale Vets</span><i></i></div><span class="map-label">Map placeholder · a live map goes here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="sec-head"><p class="eyebrow">Contact</p><h2>Ask us anything about your pet</h2><p>Not sure if your pet needs to come in? Send a message and a nurse will reply within one working day.</p></div>
+        <div class="contact-points">
+          <a href="tel:+15550100456"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>(555) 010-0456</a>
+          <a href="mailto:hello@example.com"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>hello@example.com</a>
+        </div>
+      </div>
+      <form class="form">
+        <div class="row2"><div class="field"><label for="n">Your name</label><input id="n" autocomplete="name"></div><div class="field"><label for="pn">Pet's name</label><input id="pn"></div></div>
+        <div class="row2"><div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div><div class="field"><label for="s">Species</label><select id="s"><option>Dog</option><option>Cat</option><option>Rabbit</option><option>Other</option></select></div></div>
+        <div class="field"><label for="m">Message</label><textarea id="m"></textarea></div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot"><div class="wrap"><span>© 2026 Kestrel Vale Veterinary Clinic (fictional sample)</span><span>Sample redesign by <a href="../../">Aliyan Sami</a> · <a href="../">More examples</a></span></div></footer>
+<div class="mobile-bar"><a class="btn btn-ghost" href="tel:+15550100456">Call</a><a class="btn btn-primary" href="#book">Book a visit</a></div>
+<script src="../assets/demo.js" defer></script>
+</body>
+</html>
